@@ -65,7 +65,7 @@ public abstract class AbstractScene extends AnimatedObject implements Constants,
    */ 
   public int cursorX, cursorY, pcursorX, pcursorY;
   
-  public static final String prettyVersion = "1.0.0-alpha.1";
+  public static final String prettyVersion = "1.0.0";
 
 	public static final String version = "1";
 	
