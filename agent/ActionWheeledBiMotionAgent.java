@@ -2,20 +2,21 @@
  * dandelion
  * Copyright (c) 2014 National University of Colombia, https://github.com/remixlab
  * @author Jean Pierre Charalambos, http://otrolado.info/
- *     
+ *
  * All rights reserved. Library that eases the creation of interactive
  * scenes, released under the terms of the GNU Public License v3.0
  * which is available at http://www.gnu.org/licenses/gpl.html
  *********************************************************************************/
 package remixlab.dandelion.agent;
 
+import remixlab.bogusinput.generic.agent.*;
+import remixlab.bogusinput.generic.profile.*;
 import remixlab.dandelion.core.*;
-import remixlab.tersehandling.generic.agent.*;
-import remixlab.tersehandling.generic.profile.*;
+import remixlab.dandelion.core.Constants.*;
 
 /**
- * A {@link remixlab.tersehandling.generic.agent.GenericWheeledMotionAgent} that handles Dandelion motion actions (i.e.,
- * actions triggered from a {@link remixlab.tersehandling.event.MotionEvent}). You should not instantiate this class but
+ * A {@link remixlab.bogusinput.generic.agent.ActionWheeledMotionAgent} that handles Dandelion motion actions (i.e.,
+ * actions triggered from a {@link remixlab.bogusinput.event.MotionEvent}). You should not instantiate this class but
  * one of its derived ones: {@link remixlab.dandelion.agent.HIDAgent}, {@link remixlab.dandelion.agent.JoystickAgent} or
  * {@link remixlab.dandelion.agent.MouseAgent}.
  * <p>
@@ -27,45 +28,44 @@ import remixlab.tersehandling.generic.profile.*;
  * {@link remixlab.dandelion.core.AbstractScene} actions are handled exclusively by a
  * {@link remixlab.dandelion.agent.KeyboardAgent}.
  * <p>
- * The agent uses its {@link remixlab.tersehandling.generic.profile.Profile}s (see below) to parse the generic
- * {@link remixlab.tersehandling.event.TerseEvent} to obtain a dandelion action, which is then sent to the proper (
+ * The agent uses its {@link remixlab.bogusinput.generic.profile.Profile}s (see below) to parse the generic
+ * {@link remixlab.bogusinput.event.BogusEvent} to obtain a dandelion action, which is then sent to the proper (
  * {@link #grabber()}) Frame (InteractiveFrame or InteractiveEyeFrame) for its final execution. In case the grabber is
  * not an instance of a Frame, but a different object which behavior you implemented (retrieved as with
- * {@link #foreignGrabber()}), the agent sends the raw TerseEvent to it (please refer to the mouse grabbers example).
+ * {@link #foreignGrabber()}), the agent sends the BogusEvent to it (please refer to the mouse grabbers example).
  * <p>
- * This agent holds the following InteractiveFrame {@link remixlab.tersehandling.generic.profile.Profile}s: a
+ * This agent holds the following InteractiveFrame {@link remixlab.bogusinput.generic.profile.Profile}s: a
  * {@link #frameProfile()}, a {@link #frameClickProfile()}, and a {@link #frameWheelProfile()}; together with its
  * InteractiveEyeFrame counterparts: a {@link #eyeProfile()}, a {@link #eyeClickProfile()}, and a
  * {@link #eyeWheelProfile()}. Simply retrieve a specific profile to bind an action to a shortcut, to remove it, or to
  * check your current bindings.
  * <p>
- * <b>Note</b> that the {@link remixlab.tersehandling.generic.agent.GenericWheeledMotionAgent} holds only three
- * profiles: {@link remixlab.tersehandling.generic.agent.GenericWheeledMotionAgent#wheelProfile()},
- * {@link remixlab.tersehandling.generic.agent.GenericWheeledMotionAgent#clickProfile()} and
- * {@link remixlab.tersehandling.generic.agent.GenericWheeledMotionAgent#motionProfile()}. The
- * GenericWheeledBiMotionAgent renames this three profiles for the InteractiveFrame and add those of the
- * InteractiveEyeFrame.
+ * <b>Note</b> that the {@link remixlab.bogusinput.generic.agent.ActionWheeledMotionAgent} holds only three profiles:
+ * {@link remixlab.bogusinput.generic.agent.ActionWheeledMotionAgent#wheelProfile()},
+ * {@link remixlab.bogusinput.generic.agent.ActionWheeledMotionAgent#clickProfile()} and
+ * {@link remixlab.bogusinput.generic.agent.ActionWheeledMotionAgent#motionProfile()}. The ActionWheeledBiMotionAgent
+ * renames this three profiles for the InteractiveFrame and add those of the InteractiveEyeFrame.
  * 
  * @param <P>
- *          GenericMotionProfile parameterised with a Dandelion action
+ *          ActionMotionProfile parameterised with a Dandelion action
  */
-public class GenericWheeledBiMotionAgent<P extends MotionProfile<?>> extends
-				GenericWheeledMotionAgent<MotionProfile<Constants.WheelAction>,
+public class ActionWheeledBiMotionAgent<P extends MotionProfile<?>> extends
+				ActionWheeledMotionAgent<MotionProfile<WheelAction>,
 				P,
-				ClickProfile<Constants.ClickAction>> implements Constants {
+				ClickProfile<ClickAction>> implements Constants {
 	protected P camProfile;
 	protected MotionProfile<WheelAction> camWheelProfile;
 	protected ClickProfile<ClickAction> camClickProfile;
 	protected AbstractScene scene;
 
-	public GenericWheeledBiMotionAgent(MotionProfile<WheelAction> fWProfile,
+	public ActionWheeledBiMotionAgent(MotionProfile<WheelAction> fWProfile,
 					MotionProfile<WheelAction> cWProfile,
 					P fProfile,
 					P cProfile,
 					ClickProfile<ClickAction> c,
 					ClickProfile<ClickAction> d,
 					AbstractScene scn, String n) {
-		super(fWProfile, fProfile, c, scn.eventHandler(), n);
+		super(fWProfile, fProfile, c, scn.inputHandler(), n);
 		scene = scn;
 		setDefaultGrabber(scn.eye().frame());
 		camProfile = cProfile;
@@ -75,15 +75,14 @@ public class GenericWheeledBiMotionAgent<P extends MotionProfile<?>> extends
 
 	/*
 	 * Profile defining InteractiveEyeFrame action bindings from {@link
-	 * remixlab.tersehandling.event.shortcut.ButtonShortcut}s.
+	 * remixlab.bogusinput.event.shortcut.ButtonShortcut}s.
 	 */
 	public P eyeProfile() {
 		return camProfile;
 	}
 
 	/*
-	 * Profile defining InteractiveFrame action bindings from {@link
-	 * remixlab.tersehandling.event.shortcut.ButtonShortcut}s.
+	 * Profile defining InteractiveFrame action bindings from {@link remixlab.bogusinput.event.shortcut.ButtonShortcut}s.
 	 */
 	public P frameProfile() {
 		return profile();
@@ -105,15 +104,14 @@ public class GenericWheeledBiMotionAgent<P extends MotionProfile<?>> extends
 
 	/*
 	 * Profile defining InteractiveEyeFrame action bindings from {@link
-	 * remixlab.tersehandling.event.shortcut.ClickShortcut}s.
+	 * remixlab.bogusinput.event.shortcut.ClickShortcut}s.
 	 */
 	public ClickProfile<ClickAction> eyeClickProfile() {
 		return camClickProfile;
 	}
 
 	/*
-	 * Profile defining InteractiveFrame action bindings from {@link
-	 * remixlab.tersehandling.event.shortcut.ClickShortcut}s.
+	 * Profile defining InteractiveFrame action bindings from {@link remixlab.bogusinput.event.shortcut.ClickShortcut}s.
 	 */
 	public ClickProfile<ClickAction> frameClickProfile() {
 		return clickProfile;
@@ -135,7 +133,7 @@ public class GenericWheeledBiMotionAgent<P extends MotionProfile<?>> extends
 
 	/*
 	 * Profile defining InteractiveEyeFrame action bindings from (wheel) {@link
-	 * remixlab.tersehandling.event.shortcut.ButtonShortcut}s.
+	 * remixlab.bogusinput.event.shortcut.ButtonShortcut}s.
 	 */
 	public MotionProfile<WheelAction> eyeWheelProfile() {
 		return camWheelProfile;
@@ -143,7 +141,7 @@ public class GenericWheeledBiMotionAgent<P extends MotionProfile<?>> extends
 
 	/*
 	 * Profile defining InteractiveFrame action bindings from (wheel) {@link
-	 * remixlab.tersehandling.event.shortcut.ButtonShortcut}s.
+	 * remixlab.bogusinput.event.shortcut.ButtonShortcut}s.
 	 */
 	public MotionProfile<WheelAction> frameWheelProfile() {
 		return wheelProfile;
@@ -164,7 +162,7 @@ public class GenericWheeledBiMotionAgent<P extends MotionProfile<?>> extends
 	}
 
 	/**
-	 * Calls {@link remixlab.tersehandling.generic.profile.Profile#removeAllBindings()} on all agent profiles.
+	 * Calls {@link remixlab.bogusinput.generic.profile.Profile#removeAllBindings()} on all agent profiles.
 	 */
 	public void resetAllProfiles() {
 		eyeClickProfile().removeAllBindings();
@@ -178,7 +176,7 @@ public class GenericWheeledBiMotionAgent<P extends MotionProfile<?>> extends
 	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see remixlab.tersehandling.generic.agent.GenericMotionAgent#motionProfile()
+	 * @see remixlab.bogusinput.generic.agent.ActionMotionAgent#motionProfile()
 	 */
 	@Override
 	public P motionProfile() {
@@ -192,7 +190,7 @@ public class GenericWheeledBiMotionAgent<P extends MotionProfile<?>> extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see remixlab.tersehandling.generic.agent.GenericMotionAgent#clickProfile()
+	 * @see remixlab.bogusinput.generic.agent.ActionMotionAgent#clickProfile()
 	 */
 	@Override
 	public ClickProfile<ClickAction> clickProfile() {
@@ -206,7 +204,7 @@ public class GenericWheeledBiMotionAgent<P extends MotionProfile<?>> extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see remixlab.tersehandling.generic.agent.GenericWheeledMotionAgent#wheelProfile()
+	 * @see remixlab.bogusinput.generic.agent.ActionWheeledMotionAgent#wheelProfile()
 	 */
 	@Override
 	public MotionProfile<WheelAction> wheelProfile() {
@@ -220,7 +218,7 @@ public class GenericWheeledBiMotionAgent<P extends MotionProfile<?>> extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see remixlab.tersehandling.generic.agent.GenericAgent#foreignGrabber()
+	 * @see remixlab.bogusinput.generic.agent.ActionAgent#foreignGrabber()
 	 */
 	@Override
 	protected boolean foreignGrabber() {
@@ -230,7 +228,7 @@ public class GenericWheeledBiMotionAgent<P extends MotionProfile<?>> extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see remixlab.tersehandling.generic.agent.GenericWheeledMotionAgent#info()
+	 * @see remixlab.bogusinput.generic.agent.ActionWheeledMotionAgent#info()
 	 */
 	@Override
 	public String info() {
