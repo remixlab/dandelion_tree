@@ -1256,7 +1256,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
   /**
    * Returns the wheel sensitivity.
    * <p>
-   * Default value is 5.0. A higher value will make the wheel action more efficient
+   * Default value is 15.0. A higher value will make the wheel action more efficient
    * (usually meaning faster motion). Use a negative value to invert the operation
    * direction.
    * 
