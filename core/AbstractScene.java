@@ -1615,13 +1615,6 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   }
 
   /**
-   * Convenience function that simply calls {@code drawEye(eye, 1)}.
-   */
-  public void drawEye(Eye eye) {
-    drawEye(eye, 1);
-  }
-
-  /**
    * Convenience function that simply calls
    * {@code drawCross(pg3d.color(255, 255, 255), px, py, 15, 3)}.
    */
@@ -1733,19 +1726,15 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   public abstract void drawPath(KeyFrameInterpolator kfi, int mask, int nbFrames, float scale);
 
   /**
-   * Draws a representation of the {@code camera} in the 3D virtual world.
+   * Draws a representation of the {@code eye} in the scene.
    * <p>
    * The near and far planes are drawn as quads, the frustum is drawn using lines and the
    * camera up vector is represented by an arrow to disambiguate the drawing.
    * <p>
-   * When {@code drawFarPlane} is {@code false}, only the near plane is drawn.
-   * {@code scale} can be used to scale the drawing: a value of 1.0 (default) will draw
-   * the Camera's frustum at its actual size.
-   * <p>
    * <b>Note:</b> The drawing of a Scene's own Scene.camera() should not be visible, but
    * may create artifacts due to numerical imprecisions.
    */
-  public abstract void drawEye(Eye eye, float scale);
+  public abstract void drawEye(Eye eye);
 
   /**
    * Internal use.
