@@ -499,7 +499,7 @@ public class Camera extends Eye implements Copyable {
   }
 
   /**
-
+   * 
    * Sets the {@link #zNearCoefficient()} value.
    */
   public void setZNearCoefficient(float coef) {
