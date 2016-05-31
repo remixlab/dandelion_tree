@@ -33,18 +33,17 @@ import remixlab.util.*;
  * parameter). To attach a generic-frame to {@code MyObject} use code like this:
  * 
  * <pre>
- * {
- *   &#64;code
- *   public class MyObject {
- *     public GenericFrame gFrame;
+ * {@code
+ * public class MyObject {
+ *   public GenericFrame gFrame;
  * 
- *     public void draw() {
- *       gFrame.scene().pushModelView();
- *       gFrame.applyWorldTransformation();
- *       drawMyObject();
- *       gFrame.scene().popModelView();
- *     }
+ *   public void draw() {
+ *     gFrame.scene().pushModelView();
+ *     gFrame.applyWorldTransformation();
+ *     drawMyObject();
+ *     gFrame.scene().popModelView();
  *   }
+ * }
  * }
  * </pre>
  * 
