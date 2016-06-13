@@ -2546,6 +2546,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * state setup ( {@link #setAxesVisualHint(boolean)} and
    * {@link #setGridVisualHint(boolean)}.
    */
+  //TODO perhaps should be moved to the Scene (read config)
   public void init() {
   }
 
