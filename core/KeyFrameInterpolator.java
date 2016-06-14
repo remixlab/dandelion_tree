@@ -841,10 +841,6 @@ public class KeyFrameInterpolator implements Copyable {
    * returned.
    */
   public GenericFrame keyFrame(int index) {
-    /**
-     * AbstractKeyFrame kf = keyFr.get(index); return new Frame(kf.orientation(),
-     * kf.position(), kf.magnitude());
-     */
     return keyFrameList.get(index).frame();
   }
 
