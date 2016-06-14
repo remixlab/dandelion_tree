@@ -2539,18 +2539,6 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   }
 
   /**
-   * This method is called before the first drawing happen and should be overloaded to
-   * initialize stuff. The default implementation is empty.
-   * <p>
-   * Typical usage include {@link #eye()} initialization ({@link #showAll()}) and Scene
-   * state setup ( {@link #setAxesVisualHint(boolean)} and
-   * {@link #setGridVisualHint(boolean)}.
-   */
-  //TODO perhaps should be moved to the Scene (read config)
-  public void init() {
-  }
-
-  /**
    * The method that actually defines the scene.
    * <p>
    * If you build a class that inherits from Scene, this is the method you should
