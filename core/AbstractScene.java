@@ -1264,11 +1264,9 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   public void preDraw() {
     if (avatar() != null && (!eye().anyInterpolationStarted())) {
       // works:
-      /*
-       * eye().frame().setPosition(avatar().trackingEyeFrame().position());
-       * eye().frame().setOrientation(avatar().trackingEyeFrame().orientation()) ;
-       * eye().frame().setScaling(avatar().trackingEyeFrame().scaling()); //
-       */
+      //eye().frame().setPosition(avatar().trackingEyeFrame().position());
+      //eye().frame().setOrientation(avatar().trackingEyeFrame().orientation()) ;
+      //eye().frame().setScaling(avatar().trackingEyeFrame().scaling()); // 
       // but prefer this one:
       eye().frame().fromFrame(avatar().trackingEyeFrame());
       // this one is buggy:
