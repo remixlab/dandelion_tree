@@ -1594,7 +1594,9 @@ public abstract class Eye implements Copyable {
     if (kfi.containsKey(key)) {
       KeyFrameInterpolator k = kfi.get(key);
       for (int i = 0; i < k.keyFrames().size(); ++i)
-        gScene.pruneBranch(k.keyFrames().get(i).frame());
+    	  gScene.motionAgent().removeGrabber(k.keyFrames().get(i).frame());
+      // Doesn't work since branch is already detached, i.e., frame is not reachable
+        //gScene.pruneBranch(k.keyFrames().get(i).frame());
     }
   }
 
