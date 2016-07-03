@@ -281,8 +281,8 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * algorithm. In this case, the frame should be manually added to some agents to
    * interactively handle it.
    * <p>
-   * Note that if frame is not reachable ({@link #isFrameReachable(GenericFrame)})
-   * this method returns {@code null}.
+   * Note that if frame is not reachable ({@link #isFrameReachable(GenericFrame)}) this
+   * method returns {@code null}.
    * <p>
    * When collected, pruned frames behave like {@link remixlab.dandelion.geom.Frame},
    * otherwise they are eligible for garbage collection.
@@ -1261,9 +1261,9 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   public void preDraw() {
     if (avatar() != null && (!eye().anyInterpolationStarted())) {
       // works:
-      //eye().frame().setPosition(avatar().trackingEyeFrame().position());
-      //eye().frame().setOrientation(avatar().trackingEyeFrame().orientation()) ;
-      //eye().frame().setScaling(avatar().trackingEyeFrame().scaling()); // 
+      // eye().frame().setPosition(avatar().trackingEyeFrame().position());
+      // eye().frame().setOrientation(avatar().trackingEyeFrame().orientation()) ;
+      // eye().frame().setScaling(avatar().trackingEyeFrame().scaling()); //
       // but prefer this one:
       eye().frame().fromFrame(avatar().trackingEyeFrame());
       // this one is buggy:
@@ -2546,7 +2546,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * representation is much more intuitive than a camera-centric system (which for
    * instance is the standard in OpenGL).
    */
-  //TODO: should this be kept?
+  // TODO: should this be kept?
   public void proscenium() {
   }
 
