@@ -2546,7 +2546,6 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * representation is much more intuitive than a camera-centric system (which for
    * instance is the standard in OpenGL).
    */
-  // TODO: should this be kept?
   public void proscenium() {
   }
 
