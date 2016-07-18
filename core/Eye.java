@@ -1503,14 +1503,32 @@ public abstract class Eye implements Copyable {
 
   // 7. KEYFRAMED PATHS
 
+  /**
+   * Returns the eye {@code <id, KeyFrameInterpolator>} map.
+   * 
+   * @see #keyFrameInterpolatorArray()
+   * @see #keyFrameInterpolatorList()
+   */
   public HashMap<Integer, KeyFrameInterpolator> keyFrameInterpolatorMap() {
     return kfi;
   }
 
+  /**
+   * Returns the eye {@code paths} as an array.
+   * 
+   * @see #keyFrameInterpolatorMap()
+   * @see #keyFrameInterpolatorList()
+   */
   public KeyFrameInterpolator[] keyFrameInterpolatorArray() {
     return kfi.values().toArray(new KeyFrameInterpolator[0]);
   }
 
+  /**
+   * Returns the eye {@code paths} as a list.
+   * 
+   * @see #keyFrameInterpolatorArray()
+   * @see #keyFrameInterpolatorMap()
+   */
   public List<KeyFrameInterpolator> keyFrameInterpolatorList() {
     return Arrays.asList(keyFrameInterpolatorArray());
   }
