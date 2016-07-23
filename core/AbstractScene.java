@@ -152,7 +152,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * enable them (register them at the {@link #inputHandler()}) and possibly some other
    * {@link remixlab.bias.core.Agent}s as well and .</li>
    * <li>Define whether or not the Scene {@link #isOffscreen()}.</li>
-   * <li>Call {@link #init()} at the end of the constructor.</li>
+   * <li>Call an {@code init()} method at the end of the constructor.</li>
    * </ol>
    * 
    * @see #timingHandler()
