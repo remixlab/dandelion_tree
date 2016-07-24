@@ -152,7 +152,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * enable them (register them at the {@link #inputHandler()}) and possibly some other
    * {@link remixlab.bias.core.Agent}s as well and .</li>
    * <li>Define whether or not the Scene {@link #isOffscreen()}.</li>
-   * <li>Call an {@code init()} method at the end of the constructor.</li>
+   * <li>Call {@link #init()} at the end of the constructor.</li>
    * </ol>
    * 
    * @see #timingHandler()
@@ -2531,6 +2531,13 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
     } else {
       applyTransformation(frame);
     }
+  }
+  
+  /**
+   * This method is called before the first drawing happen and should be overloaded to
+   * initialize stuff. The default implementation is empty.
+   */
+  public void init() {
   }
 
   /**
