@@ -2532,7 +2532,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
       applyTransformation(frame);
     }
   }
-  
+
   /**
    * This method is called before the first drawing happen and should be overloaded to
    * initialize stuff. The default implementation is empty.
