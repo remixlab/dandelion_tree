@@ -1079,9 +1079,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * Low level setting of visual flags. You'd prefer {@link #setAxesVisualHint(boolean)},
    * {@link #setGridVisualHint(boolean)}, {@link #setPathsVisualHint(boolean)} and
    * {@link #setPickingVisualHint(boolean)}, unless you want to set them all at once,
-   * e.g.,
-   * {@code setVisualHints(Constants.AXES | Constants.GRID | Constants.PATHS | Constants.PICKING)}
-   * .
+   * e.g., {@code setVisualHints(Scene.AXES | Scene.GRID | Scene.PATHS | Scene.PICKING)}.
    */
   public void setVisualHints(int flag) {
     visualHintMask = flag;
