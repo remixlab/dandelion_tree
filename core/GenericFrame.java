@@ -152,10 +152,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
   private boolean visit = true;
 
   /**
-   * Enumerates the two possible types of Camera.
-   * <p>
-   * This type mainly defines different camera projection matrix. Many other methods take
-   * this Type into account.
+   * Enumerates the Picking precision modes.
    */
   public enum PickingPrecision {
     FIXED, ADAPTIVE, EXACT
