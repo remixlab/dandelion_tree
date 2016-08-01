@@ -527,12 +527,10 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
     gScene = scn;
     childrenList = new ArrayList<GenericFrame>();
     // scene().addLeadingFrame(this);
-    // TODO testing
     setReferenceFrame(referenceFrame());// restorePath seems more robust
     setRotationSensitivity(1.0f);
     setScalingSensitivity(1.0f);
     setTranslationSensitivity(1.0f);
-    // TODO normalize
     setWheelSensitivity(15f);
     setKeyboardSensitivity(10f);
     setSpinningSensitivity(0.3f);
@@ -2123,7 +2121,6 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
   /**
    * User gesture into xyz-rotation conversion routine.
    */
-  // TODO needs testing no-staging
   public void rotateXYZ(DOF3Event event) {
     if (gScene.is2D()) {
       AbstractScene.showDepthWarning("rotateXYZ");
@@ -2645,7 +2642,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
       // float coef = 8E-4f;
       coef = Math.max(Math.abs((coordinatesOf(eye().anchor())).vec[2] * magnitude()), 0.2f * eye().sceneRadius());
       eyeVec.vec[2] *= coef / eye().screenHeight();
-      // TODO eye wheel seems different
+      // eye wheel seems different
       // trns.vec[2] *= coef * 8E-4f;
       eyeVec.divide(eye().frame().magnitude());
     } else {
@@ -2892,64 +2889,6 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
   public void setFlySpeed(float speed) {
     flySpd = speed;
   }
-
-  // --
-
-  // TODO tossing pending, but really seems overkill
-
-  // public final boolean isTossing() {
-  // return tossTimerTask.isActive();
-  // }
-  //
-  // public final void stopTossing() {
-  // tossTimerTask.stop();
-  // }
-  //
-  // public final Vec tossDirection() {
-  // return tDir;
-  // }
-  //
-  // public final void setTossDirection(Vec dir) {
-  // tDir = dir;
-  // }
-  //
-  // public void startTossing(MotionEvent event, Vec direction) {
-  // startTossing(direction, event.speed());
-  // }
-  //
-  // public void startTossing(Vec direction, float speed) {
-  // eventSpeed = speed;
-  // setTossDirection(direction);
-  // tossTimerTask.run(FLY_UPDATE_PERDIOD);
-  // }
-  //
-  // protected void recomputeTossDirection() {
-  // float prevSpeed = eventSpeed;
-  // float damping = 1.0f - tossDampingFx();
-  // eventSpeed *= damping;
-  // if (Math.abs(eventSpeed) < .001f)
-  // eventSpeed = 0;
-  // setTossDirection(Vec.multiply(tossDirection(), (eventSpeed / prevSpeed)));
-  // }
-  //
-  // protected void tossExecution() {
-  // if(Util.zero(tossDamping()))
-  // toss();
-  // else {
-  // if (eventSpeed == 0) {
-  // stopTossing();
-  // return;
-  // }
-  // toss();
-  // recomputeTossDirection();
-  // }
-  // }
-  //
-  // protected void toss() {
-  // translate(tossDirection());
-  // }
-
-  // --
 
   protected Quat rollPitchQuaternion(MotionEvent event, Camera camera) {
     DOF2Event dof2Event = MotionEvent.dof2Event(event);
