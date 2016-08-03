@@ -1835,7 +1835,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   /**
    * Sets the avatar object to be tracked by the Camera when it is in Third Person mode.
    * 
-   * @see #unsetAvatar()
+   * @see #resetAvatar()
    */
   public void setAvatar(Trackable t) {
     trck = t;
@@ -1858,13 +1858,21 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
     if (avatar() instanceof GenericFrame)
       inputHandler().setDefaultGrabber((GenericFrame) avatar());
   }
+  
+  /**
+   * @deprecated
+   */
+  @Deprecated
+  public Trackable unsetAvatar() {
+    return resetAvatar();
+  }
 
   /**
-   * If there's an avatar unset it. Returns previous avatar.
+   * Returns the avatar before resetting it (i.e., setting it to null).
    * 
    * @see #setAvatar(Trackable)
    */
-  public Trackable unsetAvatar() {
+  public Trackable resetAvatar() {
     Trackable prev = trck;
     if (prev != null) {
       inputHandler().resetTrackedGrabber();
