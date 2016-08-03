@@ -1858,7 +1858,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
     if (avatar() instanceof GenericFrame)
       inputHandler().setDefaultGrabber((GenericFrame) avatar());
   }
-  
+
   /**
    * @deprecated
    */
