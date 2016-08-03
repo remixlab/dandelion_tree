@@ -165,35 +165,6 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
 
   protected List<GenericFrame> childrenList;
 
-  @Override
-  public int hashCode() {
-    return new HashCodeBuilder(17, 37).appendSuper(super.hashCode()).append(grabsInputThreshold).append(pkgnPrecision)
-        .append(rotSensitivity).append(transSensitivity).append(sclSensitivity).append(spngRotation)
-        .append(spngSensitivity).append(dampFriction).append(sFriction).append(wheelSensitivity).append(keySensitivity)
-        .append(flyDisp).append(flySpd).append(scnUpVec).append(lastUpdate).append(childrenList).append(visit)
-        .toHashCode();
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (obj == null)
-      return false;
-    if (obj == this)
-      return true;
-    if (obj.getClass() != getClass())
-      return false;
-
-    GenericFrame other = (GenericFrame) obj;
-    return new EqualsBuilder().appendSuper(super.equals(obj)).append(grabsInputThreshold, other.grabsInputThreshold)
-        .append(pkgnPrecision, other.pkgnPrecision).append(dampFriction, other.dampFriction)
-        .append(sFriction, other.sFriction).append(rotSensitivity, other.rotSensitivity)
-        .append(sclSensitivity, other.sclSensitivity).append(spngRotation, other.spngRotation)
-        .append(spngSensitivity, other.spngSensitivity).append(wheelSensitivity, other.wheelSensitivity)
-        .append(keySensitivity, other.keySensitivity).append(flyDisp, other.flyDisp).append(flySpd, other.flySpd)
-        .append(scnUpVec, other.scnUpVec).append(lastUpdate, other.lastUpdate).append(childrenList, other.childrenList)
-        .append(visit, other.visit).isEquals();
-  }
-
   /**
    * Same as {@code this(scn, null, new Vec(), scn.is3D() ? new Quat() : new Rot(), 1)}.
    * 
@@ -1081,13 +1052,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
       return;
     GenericFrame source = (f1.lastGlobalUpdate() > f2.lastGlobalUpdate()) ? f1 : f2;
     GenericFrame target = (f1.lastGlobalUpdate() > f2.lastGlobalUpdate()) ? f2 : f1;
-
-    // target.fromFrame(source);
-    // TODO testing and docs
-
-    target.setPosition(source.position());
-    target.setOrientation(source.orientation());
-    target.setMagnitude(source.magnitude());
+    target.fromFrame(source);
   }
 
   // Fx

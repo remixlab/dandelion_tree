@@ -108,8 +108,7 @@ import remixlab.util.*;
 public class Frame implements Copyable {
   @Override
   public int hashCode() {
-    return new HashCodeBuilder(17, 37).append(trans).append(rot).append(scl).append(refFrame).append(cnstrnt)
-        .toHashCode();
+    return new HashCodeBuilder(17, 37).append(position()).append(orientation()).append(magnitude()).toHashCode();
   }
 
   @Override
@@ -122,8 +121,8 @@ public class Frame implements Copyable {
       return false;
 
     Frame other = (Frame) obj;
-    return new EqualsBuilder().append(trans, other.trans).append(scl, other.scl).append(rot, other.rot)
-        .append(refFrame, other.refFrame).append(cnstrnt, other.cnstrnt).isEquals();
+    return new EqualsBuilder().append(position(), other.position()).append(orientation(), other.orientation())
+        .append(magnitude(), other.magnitude()).isEquals();
   }
 
   protected Vec trans;
@@ -1290,6 +1289,9 @@ public class Frame implements Copyable {
   /**
    * Sets {@link #position()}, {@link #orientation()} and {@link #magnitude()} values from
    * those of {@code otherFrame}.
+   * <p>
+   * After calling {@code fromFrame} a call to {@code this.equals(otherFrame)} should
+   * always return {@code true}.
    */
   public void fromFrame(Frame otherFrame) {
     if (otherFrame == null)
