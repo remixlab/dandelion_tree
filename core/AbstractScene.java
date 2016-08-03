@@ -1868,7 +1868,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   }
 
   /**
-   * Returns the avatar before resetting it (i.e., setting it to null).
+   * Returns the current avatar before resetting it (i.e., setting it to null).
    * 
    * @see #setAvatar(Trackable)
    */
