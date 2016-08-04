@@ -1026,22 +1026,29 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
 
   /**
    * If {@code f1} has been more recently updated than {@code f2}, calls
-   * {@code f2.fromFrame(f1)}, otherwise calls {@code f1.fromFrame(f2)}.
+   * {@code f2.fromFrame(f1)}, otherwise calls {@code f1.fromFrame(f2)}. Calls
+   * {@code f2.fromFrame(f1)} (f1 takes precedence over f2) if both frames last updated
+   * occurred at the same time.
    * <p>
-   * This method syncs only the global parameters ({@link #position()},
+   * This method syncs only the global geometry attributes ({@link #position()},
    * {@link #orientation()} and {@link #magnitude()}) among the two frames. The
    * {@link #referenceFrame()} and {@link #constraint()} (if any) of each frame are kept
    * separately.
+   * <P>
+   * A call to {@code f1.equals(f2)} (or {@code f2.equals(f1)}) just after syncing the two
+   * frames should return {@code true}.
    * 
    * @see #fromFrame(Frame)
    */
   public static void sync(GenericFrame f1, GenericFrame f2) {
     if (f1 == null || f2 == null)
       return;
-    if (f1.lastUpdate() == f2.lastUpdate())
-      return;
-    GenericFrame source = (f1.lastUpdate() > f2.lastUpdate()) ? f1 : f2;
-    GenericFrame target = (f1.lastUpdate() > f2.lastUpdate()) ? f2 : f1;
+    GenericFrame source = f1;
+    GenericFrame target = f2;
+    if (f1.lastUpdate() != f2.lastUpdate()) {
+      source = (f1.lastUpdate() > f2.lastUpdate()) ? f1 : f2;
+      target = (f1.lastUpdate() > f2.lastUpdate()) ? f2 : f1;
+    }
     target.fromFrame(source);
     assert target.equals(source);
   }
