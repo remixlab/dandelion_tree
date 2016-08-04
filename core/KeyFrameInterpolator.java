@@ -355,7 +355,7 @@ public class KeyFrameInterpolator implements Copyable {
    * {@link #checkValidity()}.
    */
   protected void checked() {
-    lUpdate = gScene.timingHandler().frameCount();
+    lUpdate = AbstractScene.frameCount;
   }
 
   /**

@@ -695,9 +695,9 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * Use {@code AbstractScene.frameCount} to retrieve the number of frames displayed since
    * the first scene was instantiated.
    */
-  public long frameCount() {
-    return timingHandler().frameCount();
-  }
+  /*
+   * public long frameCount() { return timingHandler().frameCount(); }
+   */
 
   /**
    * Convenience wrapper function that simply calls
@@ -1271,7 +1271,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
     bindMatrices();
     if (areBoundaryEquationsEnabled() && (eye().lastUpdate() > lastEqUpdate || lastEqUpdate == 0)) {
       eye().updateBoundaryEquations();
-      lastEqUpdate = timingHandler().frameCount();
+      lastEqUpdate = frameCount;
     }
   }
 
@@ -1295,10 +1295,10 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   public void postDraw() {
     // 1. timers
     timingHandler().handle();
-    if (frameCount < frameCount())
-      frameCount = frameCount();
-    if (frameCount < frameCount() + deltaCount)
-      frameCount = frameCount() + deltaCount;
+    if (frameCount < timingHandler().frameCount())
+      frameCount = timingHandler().frameCount();
+    if (frameCount < timingHandler().frameCount() + deltaCount)
+      frameCount = timingHandler().frameCount() + deltaCount;
     // 2. Agents
     inputHandler().handle();
     // 3. Alternative use only

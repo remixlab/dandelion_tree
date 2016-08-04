@@ -145,7 +145,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
 
   protected long lastUpdate;
   protected AbstractScene gScene;
-  protected Eye theeye; // TODO add me in hashCode and equals?
+  protected Eye theeye;
 
   private float grabsInputThreshold;
 
@@ -1000,20 +1000,10 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
    */
   @Override
   protected void modified() {
-    if (gScene != null)
-      lastUpdate = gScene.frameCount();
+    lastUpdate = AbstractScene.frameCount;
     if (children() != null)
       for (GenericFrame child : children())
         child.modified();
-  }
-
-  /**
-   * Internal use. Needed by {@link #sync(Frame, Frame, boolean)}.
-   */
-  // TODO decide whether to include this one since it now seems overkill to me
-  // -jp
-  protected long lastGlobalUpdate() {
-    return lastUpdate() + gScene.deltaCount;
   }
 
   /**
@@ -1048,11 +1038,12 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
   public static void sync(GenericFrame f1, GenericFrame f2) {
     if (f1 == null || f2 == null)
       return;
-    if (f1.lastGlobalUpdate() == f2.lastGlobalUpdate())
+    if (f1.lastUpdate() == f2.lastUpdate())
       return;
-    GenericFrame source = (f1.lastGlobalUpdate() > f2.lastGlobalUpdate()) ? f1 : f2;
-    GenericFrame target = (f1.lastGlobalUpdate() > f2.lastGlobalUpdate()) ? f2 : f1;
+    GenericFrame source = (f1.lastUpdate() > f2.lastUpdate()) ? f1 : f2;
+    GenericFrame target = (f1.lastUpdate() > f2.lastUpdate()) ? f2 : f1;
     target.fromFrame(source);
+    assert target.equals(source);
   }
 
   // Fx

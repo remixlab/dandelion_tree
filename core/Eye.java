@@ -138,36 +138,6 @@ public abstract class Eye implements Copyable {
     }
   }
 
-  @Override
-  public int hashCode() {
-    return new HashCodeBuilder(17, 37).append(fpCoefficientsUpdate).append(dist).append(normal)
-        .append(lastNonFrameUpdate).append(lastFPCoeficientsUpdateIssued).append(fpCoefficients).append(gFrame)
-        .append(interpolationKfi).append(viewMat).append(projectionMat).append(scnCenter).append(scnRadius)
-        .append(scrnHeight).append(scrnWidth).
-        // append(tempFrame).
-        append(viewport).append(anchorPnt).toHashCode();
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (obj == null)
-      return false;
-    if (obj == this)
-      return true;
-    if (obj.getClass() != getClass())
-      return false;
-
-    Eye other = (Eye) obj;
-    return new EqualsBuilder().append(fpCoefficientsUpdate, other.fpCoefficientsUpdate).append(normal, other.normal)
-        .append(dist, other.dist).append(gFrame, other.gFrame).append(lastNonFrameUpdate, other.lastNonFrameUpdate)
-        .append(lastFPCoeficientsUpdateIssued, other.lastFPCoeficientsUpdateIssued)
-        .append(fpCoefficients, other.fpCoefficients).append(interpolationKfi, other.interpolationKfi)
-        .append(viewMat, other.viewMat).append(projectionMat, other.projectionMat).append(scnCenter, other.scnCenter)
-        .append(scnRadius, other.scnRadius).append(scrnHeight, other.scrnHeight).append(scrnWidth, other.scrnWidth)
-        // .append(tempFrame, other.tempFrame)
-        .append(viewport, other.viewport).append(anchorPnt, other.anchorPnt).isEquals();
-  }
-
   /**
    * Enumerates the different visibility states an object may have respect to the Eye
    * boundary.
@@ -386,7 +356,7 @@ public abstract class Eye implements Copyable {
   }
 
   protected void modified() {
-    lastNonFrameUpdate = gScene.timingHandler().frameCount();
+    lastNonFrameUpdate = AbstractScene.frameCount;
   }
 
   /**
