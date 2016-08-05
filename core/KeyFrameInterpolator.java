@@ -79,9 +79,7 @@ import remixlab.util.*;
 public class KeyFrameInterpolator implements Copyable {
   @Override
   public int hashCode() {
-    return new HashCodeBuilder(17, 37).append(currentFrmValid).append(mainFrame).append(interpolationSpd)
-        .append(interpolationStrt).append(interpolationTm).append(keyFrameList).append(lpInterpolation).append(path)
-        .append(pathIsValid).append(period).append(valuesAreValid).toHashCode();
+    return new HashCodeBuilder(17, 37).append(keyFrameList).toHashCode();
   }
 
   @Override
@@ -94,11 +92,7 @@ public class KeyFrameInterpolator implements Copyable {
       return false;
 
     KeyFrameInterpolator other = (KeyFrameInterpolator) obj;
-    return new EqualsBuilder().append(currentFrmValid, other.currentFrmValid).append(mainFrame, other.mainFrame)
-        .append(interpolationSpd, other.interpolationSpd).append(interpolationStrt, other.interpolationStrt)
-        .append(interpolationTm, other.interpolationTm).append(keyFrameList, other.keyFrameList)
-        .append(lpInterpolation, other.lpInterpolation).append(path, other.path).append(pathIsValid, other.pathIsValid)
-        .append(period, other.period).append(valuesAreValid, other.valuesAreValid).isEquals();
+    return new EqualsBuilder().append(keyFrameList, other.keyFrameList).isEquals();
   }
 
   /**
@@ -107,7 +101,7 @@ public class KeyFrameInterpolator implements Copyable {
   protected abstract class KeyFrame implements Copyable {
     @Override
     public int hashCode() {
-      return new HashCodeBuilder(17, 37).append(frm).toHashCode();
+      return new HashCodeBuilder(17, 37).append(frame()).append(time()).toHashCode();
     }
 
     @Override
@@ -120,7 +114,7 @@ public class KeyFrameInterpolator implements Copyable {
         return false;
 
       KeyFrame other = (KeyFrame) obj;
-      return new EqualsBuilder().append(frm, other.frm).isEquals();
+      return new EqualsBuilder().append(frame(), other.frame()).append(time(), other.time()).isEquals();
     }
 
     protected Vec tgPVec;

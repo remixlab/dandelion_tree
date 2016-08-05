@@ -44,30 +44,6 @@ import java.util.ArrayList;
  * the Eye {@link #frame()} coordinate system.
  */
 public class Camera extends Eye implements Copyable {
-  @Override
-  public int hashCode() {
-    return new HashCodeBuilder(17, 37).appendSuper(super.hashCode()).append(zClippingCoef).append(IODist)
-        .append(focusDist).append(physicalDist2Scrn).append(physicalScrnWidth).append(tp).append(zClippingCoef)
-        .append(zNearCoef).append(rapK).toHashCode();
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (obj == null)
-      return false;
-    if (obj == this)
-      return true;
-    if (obj.getClass() != getClass())
-      return false;
-
-    Camera other = (Camera) obj;
-    return new EqualsBuilder().appendSuper(super.equals(obj)).append(zClippingCoef, other.zClippingCoef)
-        .append(IODist, other.IODist).append(focusDist, other.focusDist)
-        .append(physicalDist2Scrn, other.physicalDist2Scrn).append(physicalScrnWidth, other.physicalScrnWidth)
-        .append(tp, other.tp).append(zClippingCoef, other.zClippingCoef).append(zNearCoef, other.zNearCoef)
-        .append(rapK, other.rapK).isEquals();
-  }
-
   /**
    * Enumerates the two possible types of Camera.
    * <p>
