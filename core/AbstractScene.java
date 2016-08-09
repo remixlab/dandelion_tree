@@ -2528,8 +2528,6 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * defined by the frame.
    */
   public void applyWorldTransformation(Frame frame) {
-    // TODO check for beta2 doing these with frames position(), orientation()
-    // and magnitude()
     Frame refFrame = frame.referenceFrame();
     if (refFrame != null) {
       applyWorldTransformation(refFrame);
