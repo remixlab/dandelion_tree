@@ -695,9 +695,9 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * Use {@code AbstractScene.frameCount} to retrieve the number of frames displayed since
    * the first scene was instantiated.
    */
-  /*
-   * public long frameCount() { return timingHandler().frameCount(); }
-   */
+  public long frameCount() {
+    return timingHandler().frameCount();
+  }
 
   /**
    * Convenience wrapper function that simply calls
