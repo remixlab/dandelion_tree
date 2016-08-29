@@ -180,7 +180,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * All leading frames are also reachable by the {@link #traverseGraph()} algorithm for
    * which they are the seeds.
    * 
-   * @see #frames()
+   * @see #frames(boolean)
    * @see #isFrameReachable(GenericFrame)
    * @see #pruneBranch(GenericFrame)
    */
@@ -347,8 +347,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * Returns a list of all the frames that are reachable by the {@link #traverseGraph()}
    * algorithm, including the EyeFrames (when {@code eyeframes} is {@code true}).
    * 
-   * @ see {@link #isFrameReachable(GenericFrame)}
-   * 
+   * @see #isFrameReachable(GenericFrame)
    * @see remixlab.dandelion.core.GenericFrame#isEyeFrame()
    */
   public ArrayList<GenericFrame> frames(boolean eyeframes) {
