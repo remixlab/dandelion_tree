@@ -781,6 +781,11 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
     return false;
   }
 
+  /**
+   * Internal use. You don't need to call this.
+   * <p>
+   * Automatically called by agents handling this frame.
+   */
   public boolean checkIfGrabsInput(MotionEvent event) {
     if (isEyeFrame())
       return false;
@@ -795,25 +800,45 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
     return false;
   }
 
-  protected boolean checkIfGrabsInput(ClickEvent event) {
+  /**
+   * Internal use. You don't need to call this.
+   * <p>
+   * Automatically called by agents handling this frame.
+   */
+  public boolean checkIfGrabsInput(ClickEvent event) {
     if (isEyeFrame())
       return false;
     return checkIfGrabsInput(event.x(), event.y());
   }
 
-  protected boolean checkIfGrabsInput(KeyboardEvent event) {
+  /**
+   * Internal use. You don't need to call this.
+   * <p>
+   * Automatically called by agents handling this frame.
+   */
+  public boolean checkIfGrabsInput(KeyboardEvent event) {
     AbstractScene.showMissingImplementationWarning("checkIfGrabsInput(KeyboardEvent event)", this.getClass().getName());
     return false;
   }
 
-  protected boolean checkIfGrabsInput(DOF1Event event) {
+  /**
+   * Internal use. You don't need to call this.
+   * <p>
+   * Automatically called by agents handling this frame.
+   */
+  public boolean checkIfGrabsInput(DOF1Event event) {
     if (isEyeFrame())
       return false;
     AbstractScene.showMissingImplementationWarning("checkIfGrabsInput(DOF1Event event)", this.getClass().getName());
     return false;
   }
 
-  protected boolean checkIfGrabsInput(DOF2Event event) {
+  /**
+   * Internal use. You don't need to call this.
+   * <p>
+   * Automatically called by agents handling this frame.
+   */
+  public boolean checkIfGrabsInput(DOF2Event event) {
     if (isEyeFrame())
       return false;
     if (event.isAbsolute()) {
@@ -835,11 +860,21 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
     return ((Math.abs(x - proj.vec[0]) < halfThreshold) && (Math.abs(y - proj.vec[1]) < halfThreshold));
   }
 
-  protected boolean checkIfGrabsInput(DOF3Event event) {
+  /**
+   * Internal use. You don't need to call this.
+   * <p>
+   * Automatically called by agents handling this frame.
+   */
+  public boolean checkIfGrabsInput(DOF3Event event) {
     return checkIfGrabsInput(event.dof2Event());
   }
 
-  protected boolean checkIfGrabsInput(DOF6Event event) {
+  /**
+   * Internal use. You don't need to call this.
+   * <p>
+   * Automatically called by agents handling this frame.
+   */
+  public boolean checkIfGrabsInput(DOF6Event event) {
     return checkIfGrabsInput(event.dof3Event().dof2Event());
   }
 
@@ -861,7 +896,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
    * Override this method when you want the object to perform an interaction from a
    * {@link remixlab.bias.event.MotionEvent}.
    */
-  protected void performInteraction(MotionEvent event) {
+  public void performInteraction(MotionEvent event) {
     if (event instanceof DOF1Event)
       performInteraction((DOF1Event) event);
     if (event instanceof DOF2Event)
