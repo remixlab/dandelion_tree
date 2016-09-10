@@ -1903,12 +1903,12 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
       initEvent = event.get();
       gScene.setZoomVisualHint(true);
     } else if (event.flushed()) {
-      event.setPreviousEvent(initEvent.get());
+      DOF2Event e = new DOF2Event(initEvent.get(), event.x(), event.y(), event.modifiers(), event.id());
       gScene.setZoomVisualHint(false);
-      int w = (int) Math.abs(event.dx());
-      int tlX = (int) event.prevX() < (int) event.x() ? (int) event.prevX() : (int) event.x();
-      int h = (int) Math.abs(event.dy());
-      int tlY = (int) event.prevY() < (int) event.y() ? (int) event.prevY() : (int) event.y();
+      int w = (int) Math.abs(e.dx());
+      int tlX = (int) e.prevX() < (int) e.x() ? (int) e.prevX() : (int) e.x();
+      int h = (int) Math.abs(e.dy());
+      int tlY = (int) e.prevY() < (int) e.y() ? (int) e.prevY() : (int) e.y();
       eye().interpolateToZoomOnRegion(new Rect(tlX, tlY, w, h));
     }
   }
