@@ -13,7 +13,9 @@ package remixlab.dandelion.geom;
 import remixlab.util.*;
 
 /**
- * A class to describe a two or three dimensional vector.
+ * A class to describe a two or three dimensional vector. This class API aims to conform
+ * that of the great <a href="https://processing.org/reference/PVector.html">Processing
+ * PVector</a>.
  * <p>
  * The result of all functions are applied to the vector itself, with the exception of
  * cross(), which returns a new Vec (or writes to a specified 'target' Vec). That is,

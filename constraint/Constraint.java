@@ -13,7 +13,10 @@ package remixlab.dandelion.constraint;
 import remixlab.dandelion.geom.*;
 
 /**
- * An interface class for Frame constraints.
+ * An interface class for Frame constraints. This nterface API aims to conform that of the
+ * great <a href=
+ * "http://libqglviewer.com/refManual/classqglviewer_1_1Constraint.html">libQGLViewer
+ * Constraint</a>.
  * <p>
  * This class defines the interface for the constraint that can be applied to a Frame to
  * limit its motion. Use {@link remixlab.dandelion.geom.Frame#setConstraint(Constraint)}

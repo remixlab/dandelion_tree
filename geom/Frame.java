@@ -17,7 +17,9 @@ import remixlab.util.*;
  * A Frame is a 2D or 3D coordinate system, represented by a {@link #position()} , an
  * {@link #orientation()} and {@link #magnitude()}. The order of these transformations is
  * important: the Frame is first translated, then rotated around the new translated origin
- * and then scaled.
+ * and then scaled. This class API aims to conform that of the great
+ * <a href="http://libqglviewer.com/refManual/classqglviewer_1_1Frame.html">libQGLViewer
+ * Frame</a>, but it adds {@link #magnitude()} to it.
  * <p>
  * A Frame is useful to define the position, orientation and magnitude of an object, using
  * its {@link #matrix()} method, as shown below:

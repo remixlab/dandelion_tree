@@ -16,7 +16,10 @@ import remixlab.util.Util;
 
 /**
  * A 3D {@link remixlab.dandelion.geom.Rotation} is a 4 element unit quaternion
- * represented by single precision floating point x,y,z,w coordinates.
+ * represented by single precision floating point x,y,z,w coordinates. This class API aims
+ * to conform that of the great <a href=
+ * "http://libqglviewer.com/refManual/classqglviewer_1_1Quaternion.html">libQGLViewer
+ * Quaternion</a>.
  */
 public class Quat implements Linkable, Rotation {
   @Override

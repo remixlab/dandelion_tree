@@ -16,7 +16,10 @@ import remixlab.util.*;
 import java.util.ArrayList;
 
 /**
- * 3D implementation of the {@link remixlab.dandelion.core.Eye} abstract class.
+ * 3D implementation of the {@link remixlab.dandelion.core.Eye} abstract class. This class
+ * API aims to conform that of the great
+ * <a href="http://libqglviewer.com/refManual/classqglviewer_1_1Camera.html">libQGLViewer
+ * Camera</a>.
  * <p>
  * The Camera {@link #type()} can be {@code ORTHOGRAPHIC} or {@code PERSPECTIVE} (
  * {@link #fieldOfView()} is meaningless in the latter case).
