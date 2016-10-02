@@ -112,8 +112,6 @@ public abstract class Eye implements Copyable {
 
     @Override
     public void performInteraction(KeyboardEvent event) {
-      if (bypassKey(event))
-        return;
       if (event.isShiftDown()) {
         if (event.id() == UP_KEY)
           translateY(true);
