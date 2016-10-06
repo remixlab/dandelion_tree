@@ -394,7 +394,7 @@ public abstract class Eye implements Copyable {
    * frame is detached from the scene
    * {@link remixlab.dandelion.core.AbstractScene#frames(boolean)} list.
    * <p>
-   * This method is useful to perform animations for all eye interpolation rutines.
+   * This method is useful to perform animations for all eye interpolation routines.
    */
   public GrabberEyeFrame detachFrame() {
     GrabberEyeFrame frame = new GrabberEyeFrame(gScene);
