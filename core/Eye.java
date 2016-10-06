@@ -81,6 +81,14 @@ public abstract class Eye implements Copyable {
     }
 
     @Override
+    protected GrabberEyeFrame detach() {
+      GrabberEyeFrame frame = new GrabberEyeFrame(scene());
+      scene().pruneBranch(frame);
+      frame.fromFrame(this);
+      return frame;
+    }
+
+    @Override
     public void performInteraction(MotionEvent event) {
       switch (event.shortcut().id()) {
       case LEFT_ID:
@@ -1541,7 +1549,7 @@ public abstract class Eye implements Copyable {
       info = false;
     }
 
-    GenericFrame keyFrame = scene().detachFrame(this);
+    GenericFrame keyFrame = frame().detach();
     keyFrame.setPickingPrecision(GenericFrame.PickingPrecision.FIXED);
     keyFrame.setGrabsInputThreshold(AbstractScene.platform() == Platform.PROCESSING_ANDROID ? 50 : 20);
     if (gScene.pathsVisualHint())
@@ -1970,9 +1978,9 @@ public abstract class Eye implements Copyable {
       stopInterpolations();
 
     interpolationKfi.deletePath();
-    interpolationKfi.addKeyFrame(scene().detachFrame(this));
+    interpolationKfi.addKeyFrame(frame().detach());
     GenericFrame originalFrame = frame();
-    GenericFrame tempFrame = scene().detachFrame(this);
+    GenericFrame tempFrame = frame().detach();
     replaceFrame(tempFrame);
     fitScreenRegion(rectangle);
     setFrame(originalFrame);
@@ -1996,9 +2004,9 @@ public abstract class Eye implements Copyable {
       stopInterpolations();
 
     interpolationKfi.deletePath();
-    interpolationKfi.addKeyFrame(scene().detachFrame(this));
+    interpolationKfi.addKeyFrame(frame().detach());
     GenericFrame originalFrame = frame();
-    GenericFrame tempFrame = scene().detachFrame(this);
+    GenericFrame tempFrame = frame().detach();
     replaceFrame(tempFrame);
     showEntireScene();
     setFrame(originalFrame);
@@ -2031,7 +2039,7 @@ public abstract class Eye implements Copyable {
       stopInterpolations();
 
     interpolationKfi.deletePath();
-    interpolationKfi.addKeyFrame(scene().detachFrame(this));
+    interpolationKfi.addKeyFrame(frame().detach());
     interpolationKfi.addKeyFrame(fr, duration);
     interpolationKfi.startInterpolation();
   }

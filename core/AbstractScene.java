@@ -389,20 +389,6 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   // Actions
 
   /**
-   * Returns a frame with the current eye {@link remixlab.dandelion.core.Eye#frame()}
-   * parameters. The newly returned frame is detached from the scene
-   * {@link #frames(boolean)} list.
-   * <p>
-   * This method is useful to perform animations for all eye interpolation routines.
-   */
-  protected GenericFrame detachFrame(Eye eye) {
-    Eye.GrabberEyeFrame frame = eye.new GrabberEyeFrame(this);
-    pruneBranch(frame);
-    frame.fromFrame(eye.frame());
-    return frame;
-  }
-
-  /**
    * Same as {@code eye().addKeyFrameToPath(1)}.
    * 
    * @see remixlab.dandelion.core.Eye#addKeyFrameToPath(int)

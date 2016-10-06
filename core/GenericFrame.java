@@ -587,6 +587,20 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
     return new GenericFrame(this);
   }
 
+  /**
+   * Returns a frame with this frame current parameters. The newly returned frame is
+   * detached from the scene {@link remixlab.dandelion.core.AbstractScene#frames(boolean)}
+   * list.
+   * <p>
+   * This method is useful to perform animations for all eye interpolation routines.
+   */
+  protected GenericFrame detach() {
+    GenericFrame frame = new GenericFrame(scene());
+    scene().pruneBranch(frame);
+    frame.fromFrame(this);
+    return frame;
+  }
+
   // GRAPH
 
   @Override
