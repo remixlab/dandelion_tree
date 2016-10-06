@@ -18,6 +18,7 @@ import java.util.List;
 
 import remixlab.bias.core.*;
 import remixlab.bias.event.*;
+import remixlab.dandelion.core.AbstractScene.Platform;
 import remixlab.dandelion.core.KeyFrameInterpolator.KeyFrame;
 import remixlab.dandelion.geom.*;
 import remixlab.fpstiming.TimingTask;
@@ -387,20 +388,6 @@ public abstract class Eye implements Copyable {
    */
   public void flip() {
     gScene.flip();
-  }
-
-  /**
-   * Returns a frame with the current {@link #frame()} parameters. The newly returned
-   * frame is detached from the scene
-   * {@link remixlab.dandelion.core.AbstractScene#frames(boolean)} list.
-   * <p>
-   * This method is useful to perform animations for all eye interpolation routines.
-   */
-  public GrabberEyeFrame detachFrame() {
-    GrabberEyeFrame frame = new GrabberEyeFrame(gScene);
-    scene().pruneBranch(frame);
-    frame.fromFrame(frame());
-    return frame;
   }
 
   /**
@@ -1554,9 +1541,9 @@ public abstract class Eye implements Copyable {
       info = false;
     }
 
-    GenericFrame keyFrame = detachFrame();
+    GenericFrame keyFrame = scene().detachFrame(this);
     keyFrame.setPickingPrecision(GenericFrame.PickingPrecision.FIXED);
-    keyFrame.setGrabsInputThreshold(20);
+    keyFrame.setGrabsInputThreshold(AbstractScene.platform() == Platform.PROCESSING_ANDROID ? 50 : 20);
     if (gScene.pathsVisualHint())
       gScene.motionAgent().addGrabber(keyFrame);
     kfi.get(key).addKeyFrame(keyFrame);
@@ -1983,9 +1970,9 @@ public abstract class Eye implements Copyable {
       stopInterpolations();
 
     interpolationKfi.deletePath();
-    interpolationKfi.addKeyFrame(detachFrame());
+    interpolationKfi.addKeyFrame(scene().detachFrame(this));
     GenericFrame originalFrame = frame();
-    GenericFrame tempFrame = detachFrame();
+    GenericFrame tempFrame = scene().detachFrame(this);
     replaceFrame(tempFrame);
     fitScreenRegion(rectangle);
     setFrame(originalFrame);
@@ -2009,9 +1996,9 @@ public abstract class Eye implements Copyable {
       stopInterpolations();
 
     interpolationKfi.deletePath();
-    interpolationKfi.addKeyFrame(detachFrame());
+    interpolationKfi.addKeyFrame(scene().detachFrame(this));
     GenericFrame originalFrame = frame();
-    GenericFrame tempFrame = detachFrame();
+    GenericFrame tempFrame = scene().detachFrame(this);
     replaceFrame(tempFrame);
     showEntireScene();
     setFrame(originalFrame);
@@ -2044,7 +2031,7 @@ public abstract class Eye implements Copyable {
       stopInterpolations();
 
     interpolationKfi.deletePath();
-    interpolationKfi.addKeyFrame(detachFrame());
+    interpolationKfi.addKeyFrame(scene().detachFrame(this));
     interpolationKfi.addKeyFrame(fr, duration);
     interpolationKfi.startInterpolation();
   }

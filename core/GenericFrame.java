@@ -16,6 +16,7 @@ import java.util.List;
 
 import remixlab.bias.core.*;
 import remixlab.bias.event.*;
+import remixlab.dandelion.core.AbstractScene.Platform;
 import remixlab.dandelion.geom.*;
 import remixlab.fpstiming.TimingTask;
 import remixlab.util.*;
@@ -461,7 +462,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
     // setGrabsInputThreshold(Math.round(scn.radius()/4));
     scene().inputHandler().addGrabber(this);
     pkgnPrecision = PickingPrecision.FIXED;
-    setGrabsInputThreshold(20);
+    setGrabsInputThreshold(AbstractScene.platform() == Platform.PROCESSING_ANDROID ? 50 : 20);
     setFlySpeed(0.01f * scene().eye().sceneRadius());
   }
 
@@ -3019,8 +3020,9 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
    * {@link PickingPrecision#EXACT}. See {@link #setPickingPrecision(PickingPrecision)}
    * for details.
    * <p>
-   * Default behavior is to set the {@link #grabsInputThreshold()} to 20 pixels length (in
-   * a non-adaptive manner).
+   * Default behavior is to set the {@link #grabsInputThreshold()} (in a non-adaptive
+   * manner) to 20 length if {@link remixlab.dandelion.core.AbstractScene#platform()} is
+   * DESKTOP or to 50 pixels if it is ANDROID.
    * <p>
    * Negative {@code threshold} values are silently ignored.
    * 

@@ -1197,7 +1197,7 @@ public class Camera extends Eye implements Copyable {
       stopInterpolations();
 
     interpolationKfi.deletePath();
-    interpolationKfi.addKeyFrame(detachFrame());
+    interpolationKfi.addKeyFrame(scene().detachFrame(this));
     // TODO experimental
     GenericFrame frame = new GenericFrame(gScene,
         Vec.add(Vec.multiply(frame().position(), 0.3f), Vec.multiply(target, 0.7f)), frame().orientation(),
@@ -1209,7 +1209,7 @@ public class Camera extends Eye implements Copyable {
     // 0.7f)), frame().orientation(), frame().magnitude()).detach(), 0.4f);
 
     GenericFrame originalFrame = frame();
-    GenericFrame tempFrame = detachFrame();
+    GenericFrame tempFrame = scene().detachFrame(this);
     tempFrame.setPosition(Vec.add(Vec.multiply(frame().position(), coef), Vec.multiply(target, (1.0f - coef))));
     replaceFrame(tempFrame);
     lookAt(target);
