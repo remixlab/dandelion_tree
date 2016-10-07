@@ -1323,14 +1323,9 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   }
 
   protected void drawPickingTargets() {
-    List<GenericFrame> gList = new ArrayList<GenericFrame>();
-    for (Grabber mg : motionAgent().grabbers())
-      if (mg instanceof GenericFrame)
-        if (!((GenericFrame) mg).isEyeFrame())
-          gList.add((GenericFrame) mg);
-    gList.removeAll(eye.keyFrames());
-    for (GenericFrame g : gList)
-      this.drawPickingTarget(g);
+    for (GenericFrame frame : frames(false))
+      // if(inputHandler().hasGrabber(frame))
+      drawPickingTarget(frame);
   }
 
   /**
@@ -1358,11 +1353,11 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   }
 
   protected void drawPaths() {
-    /*
-     * Iterator<Integer> itrtr = eye.kfi.keySet().iterator(); while (itrtr.hasNext()) {
-     * Integer key = itrtr.next(); drawPath(eye.keyFrameInterpolatorMap().get(key), 3,
-     * is3D() ? 5 : 2, radius()); }
-     */
+    // Iterator<Integer> itrtr = eye.kfi.keySet().iterator(); while (itrtr.hasNext()) {
+    // Integer key = itrtr.next();
+    // drawPath(eye.keyFrameInterpolatorMap().get(key), 3, is3D() ? 5 : 2, radius());
+    // }
+
     // alternative:
     // /*
     KeyFrameInterpolator[] k = eye.keyFrameInterpolatorArray();
@@ -1370,8 +1365,10 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
       drawPath(k[i], 3, 5, radius());
     // */
 
-    for (GenericFrame gFrame : eye.keyFrames())
-      drawPickingTarget(gFrame);
+    /*
+     * // TODO experimental for (GenericFrame gFrame : eye.keyFrames())
+     * drawPickingTarget(gFrame); //
+     */
   }
 
   /**

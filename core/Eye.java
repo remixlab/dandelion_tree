@@ -10,7 +10,6 @@
 
 package remixlab.dandelion.core;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -19,7 +18,6 @@ import java.util.List;
 import remixlab.bias.core.*;
 import remixlab.bias.event.*;
 import remixlab.dandelion.core.AbstractScene.Platform;
-import remixlab.dandelion.core.KeyFrameInterpolator.KeyFrame;
 import remixlab.dandelion.geom.*;
 import remixlab.fpstiming.TimingTask;
 import remixlab.util.*;
@@ -1553,7 +1551,7 @@ public abstract class Eye implements Copyable {
     keyFrame.setPickingPrecision(GenericFrame.PickingPrecision.FIXED);
     keyFrame.setGrabsInputThreshold(AbstractScene.platform() == Platform.PROCESSING_ANDROID ? 50 : 20);
     if (gScene.pathsVisualHint())
-      gScene.motionAgent().addGrabber(keyFrame);
+      gScene.inputHandler().addGrabber(keyFrame);
     kfi.get(key).addKeyFrame(keyFrame);
 
     if (info)
@@ -1575,7 +1573,7 @@ public abstract class Eye implements Copyable {
     if (kfi.containsKey(key)) {
       KeyFrameInterpolator k = kfi.get(key);
       for (int i = 0; i < k.keyFrames().size(); ++i)
-        gScene.motionAgent().removeGrabber(k.keyFrames().get(i).frame());
+        gScene.inputHandler().removeGrabber(k.keyFrames().get(i).frame());
       // Doesn't work since branch is already detached, i.e., frame is not reachable
       // gScene.pruneBranch(k.keyFrames().get(i).frame());
     }
@@ -1596,17 +1594,8 @@ public abstract class Eye implements Copyable {
     if (kfi.containsKey(key)) {
       KeyFrameInterpolator k = kfi.get(key);
       for (int i = 0; i < k.keyFrames().size(); ++i)
-        gScene.motionAgent().addGrabber(k.keyFrames().get(i).frame());
+        gScene.inputHandler().addGrabber(k.keyFrames().get(i).frame());
     }
-  }
-
-  protected List<GenericFrame> keyFrames() {
-    List<GenericFrame> frames = new ArrayList<GenericFrame>();
-    for (KeyFrameInterpolator k : keyFrameInterpolatorMap().values())
-      for (KeyFrame keyFrame : k.keyFrames())
-        // if(scene.motionAgent().hasGrabber(keyFrame.frame()))//also works ;)
-        frames.add(keyFrame.frame());
-    return frames;
   }
 
   /**
