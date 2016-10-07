@@ -2691,8 +2691,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
       if (ref instanceof GenericFrame)
         gScene.pruneBranch((GenericFrame) ref);
       else if (ref instanceof Grabber) {
-        gScene.motionAgent().removeGrabber((Grabber) ref);
-        gScene.keyboardAgent().removeGrabber((Grabber) ref);
+        gScene.inputHandler().removeGrabber((Grabber) ref);
       }
       GenericFrame copy = get();
       gScene.pruneBranch(copy);
