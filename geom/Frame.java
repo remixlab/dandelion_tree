@@ -110,7 +110,7 @@ import remixlab.util.*;
 public class Frame implements Copyable {
   @Override
   public int hashCode() {
-    return new HashCodeBuilder(17, 37).append(position()).append(orientation()).append(magnitude()).toHashCode();
+    return new HashCodeBuilder(17, 37).append(translation()).append(rotation()).append(scaling()).toHashCode();
   }
 
   @Override
@@ -123,8 +123,8 @@ public class Frame implements Copyable {
       return false;
 
     Frame other = (Frame) obj;
-    return new EqualsBuilder().append(position(), other.position()).append(orientation(), other.orientation())
-        .append(magnitude(), other.magnitude()).isEquals();
+    return new EqualsBuilder().append(translation(), other.translation()).append(rotation(), other.rotation())
+        .append(scaling(), other.scaling()).isEquals();
   }
 
   protected Vec trans;
