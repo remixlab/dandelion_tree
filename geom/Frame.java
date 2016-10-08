@@ -650,9 +650,9 @@ public class Frame implements Copyable {
       Frame ref = frame.get();
       Frame copy = get();
       copy.setReferenceFrame(ref);
-      copy.fromFrame(this);
+      copy.set(this);
       ref.rotate(new Quat(roll, pitch, yaw));
-      fromFrame(copy);
+      set(copy);
       return;
     }
   }
@@ -1114,7 +1114,7 @@ public class Frame implements Copyable {
   // CONVERSION
 
   /**
-   * Returns the {@link remixlab.dandelion.geom.Mat} associated with this Frame.
+   * Returns the local transformation matrix represented by the Frame.
    * <p>
    * This method could be used in conjunction with {@code applyMatrix()} to modify the
    * {@link remixlab.dandelion.core.AbstractScene#modelView()} matrix from a Frame
@@ -1183,7 +1183,7 @@ public class Frame implements Copyable {
   }
 
   /**
-   * Returns the transformation matrix represented by the Frame.
+   * Returns the global transformation matrix represented by the Frame.
    * <p>
    * This method should be used in conjunction with {@code applyMatrix()} to modify the
    * {@link remixlab.dandelion.core.AbstractScene#modelView()} matrix from a Frame:
@@ -1289,18 +1289,51 @@ public class Frame implements Copyable {
   }
 
   /**
+   * Same as {@code #setWorldMatrix(Frame)}.
+   * 
+   * @see #setWorldMatrix(Frame)
+   */
+  public void set(Frame otherFrame) {
+    setWorldMatrix(otherFrame);
+  }
+
+  /**
    * Sets {@link #position()}, {@link #orientation()} and {@link #magnitude()} values from
    * those of {@code otherFrame}.
    * <p>
-   * After calling {@code fromFrame} a call to {@code this.equals(otherFrame)} should
-   * always return {@code true}.
+   * After calling {@code set} a call to {@code this.equals(otherFrame)} should return
+   * {@code true}.
+   * 
+   * @see #setMatrix(Frame)
    */
-  public void fromFrame(Frame otherFrame) {
+  public void setWorldMatrix(Frame otherFrame) {
     if (otherFrame == null)
       return;
     setPosition(otherFrame.position());
     setOrientation(otherFrame.orientation());
     setMagnitude(otherFrame.magnitude());
+  }
+
+  /**
+   * Sets {@link #translation()}, {@link #rotation()} and {@link #scaling()} values from
+   * those of {@code otherFrame}.
+   * 
+   * @see #setWorldMatrix(Frame)
+   */
+  public void setMatrix(Frame otherFrame) {
+    if (otherFrame == null)
+      return;
+    setTranslation(otherFrame.translation());
+    setRotation(otherFrame.rotation());
+    setScaling(otherFrame.scaling());
+  }
+
+  /**
+   * @deprecated use {@link #set(Frame)}.
+   */
+  @Deprecated
+  public void fromFrame(Frame otherFrame) {
+    set(otherFrame);
   }
 
   /**

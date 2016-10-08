@@ -597,7 +597,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
   protected GenericFrame detach() {
     GenericFrame frame = new GenericFrame(scene());
     scene().pruneBranch(frame);
-    frame.fromFrame(this);
+    frame.set(this);
     return frame;
   }
 
@@ -1050,15 +1050,15 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
 
   /**
    * If {@code f1} has been more recently updated than {@code f2}, calls
-   * {@code f2.fromFrame(f1)}, otherwise calls {@code f1.fromFrame(f2)}. Does nothing if
-   * both objects were updated at the same frame.
+   * {@code f2.setWorldMatrix(f1)}, otherwise calls {@code f1.setWorldMatrix(f2)}. Does
+   * nothing if both objects were updated at the same frame.
    * <p>
    * This method syncs only the global geometry attributes ({@link #position()},
    * {@link #orientation()} and {@link #magnitude()}) among the two frames. The
    * {@link #referenceFrame()} and {@link #constraint()} (if any) of each frame are kept
    * separately.
    * 
-   * @see #fromFrame(Frame)
+   * @see #set(Frame)
    */
   public static void sync(GenericFrame f1, GenericFrame f2) {
     if (f1 == null || f2 == null)
@@ -1067,7 +1067,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
       return;
     GenericFrame source = (f1.lastUpdate() > f2.lastUpdate()) ? f1 : f2;
     GenericFrame target = (f1.lastUpdate() > f2.lastUpdate()) ? f2 : f1;
-    target.fromFrame(source);
+    target.setWorldMatrix(source);
   }
 
   // Fx
@@ -2696,9 +2696,9 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
       GenericFrame copy = get();
       gScene.pruneBranch(copy);
       copy.setReferenceFrame(ref);
-      copy.fromFrame(this);
+      copy.set(this);
       ref.rotate(new Quat(gScene.isLeftHanded() ? -roll : roll, pitch, gScene.isLeftHanded() ? -yaw : yaw));
-      fromFrame(copy);
+      set(copy);
       return;
     }
   }

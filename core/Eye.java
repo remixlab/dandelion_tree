@@ -82,7 +82,7 @@ public abstract class Eye implements Copyable {
     protected GrabberEyeFrame detach() {
       GrabberEyeFrame frame = new GrabberEyeFrame(scene());
       scene().pruneBranch(frame);
-      frame.fromFrame(this);
+      frame.set(this);
       return frame;
     }
 
