@@ -961,12 +961,11 @@ public class Frame implements Copyable {
    * normalized.
    */
   public final void projectOnLine(Vec origin, Vec direction) {
-    //Vec shift = Vec.subtract(origin, position());
-    Vec shift = Vec.subtract(origin, translation());
+    Vec position = position();
+    Vec shift = Vec.subtract(origin, position);
     Vec proj = shift;
     proj = Vec.projectVectorOnAxis(proj, direction);
-    translate(Vec.subtract(shift, proj));
-    //translate(referenceFrame() == null ? Vec.subtract(shift, proj) : Vec.divide(Vec.subtract(shift, proj), referenceFrame().magnitude()));
+    setPosition(Vec.add(position, Vec.subtract(shift, proj)));
   }
 
   /**

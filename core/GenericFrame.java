@@ -1546,8 +1546,6 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
     return event instanceof DOF1Event;
   }
 
-  //
-
   /**
    * Wrapper method for {@link #alignWithFrame(Frame, boolean, float)} that discriminates
    * between eye and non-eye frames.
@@ -1566,13 +1564,8 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
     if (isEyeFrame())
       eye().centerScene();
     else
-      if(referenceFrame() != null) 
-        projectOnLine(referenceFrame().coordinatesOf(gScene.eye().position()), referenceFrame().transformOf(gScene.eye().viewDirection()));
-      else
-        projectOnLine(gScene.eye().position(), gScene.eye().viewDirection());
+      projectOnLine(gScene.eye().position(), gScene.eye().viewDirection());
   }
-
-  //
 
   /**
    * User gesture into x-translation conversion routine.
