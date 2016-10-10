@@ -1566,7 +1566,10 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
     if (isEyeFrame())
       eye().centerScene();
     else
-      projectOnLine(gScene.eye().position(), gScene.eye().viewDirection());
+      if(referenceFrame() != null) 
+        projectOnLine(referenceFrame().coordinatesOf(gScene.eye().position()), referenceFrame().transformOf(gScene.eye().viewDirection()));
+      else
+        projectOnLine(gScene.eye().position(), gScene.eye().viewDirection());
   }
 
   //
