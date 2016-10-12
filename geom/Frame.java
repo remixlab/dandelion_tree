@@ -650,9 +650,9 @@ public class Frame implements Copyable {
       Frame ref = frame.get();
       Frame copy = get();
       copy.setReferenceFrame(ref);
-      copy.set(this);
+      copy.setWorldMatrix(this);
       ref.rotate(new Quat(roll, pitch, yaw));
-      set(copy);
+      setWorldMatrix(copy);
       return;
     }
   }

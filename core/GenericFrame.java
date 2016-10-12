@@ -2692,9 +2692,9 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
       GenericFrame copy = get();
       gScene.pruneBranch(copy);
       copy.setReferenceFrame(ref);
-      copy.set(this);
+      copy.setWorldMatrix(this);
       ref.rotate(new Quat(gScene.isLeftHanded() ? -roll : roll, pitch, gScene.isLeftHanded() ? -yaw : yaw));
-      set(copy);
+      setWorldMatrix(copy);
       return;
     }
   }
