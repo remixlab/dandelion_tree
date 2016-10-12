@@ -28,13 +28,13 @@ import remixlab.fpstiming.*;
  * For an introduction to DANDELION please refer to
  * <a href="http://nakednous.github.io/projects/dandelion">this</a>.
  * <p>
- * Instantiated scene {@link remixlab.dandelion.core.GenericFrame}s form a scene-graph of
- * transformations which may be traverse with {@link #traverseGraph()}. The frame
+ * Instantiated scene {@link remixlab.dandelion.core.GenericFrame}s form a scene-tree of
+ * transformations which may be traverse with {@link #traverseTree()}. The frame
  * collection belonging to the scene may be retrieved with {@link #frames(boolean)}. The
  * scene provides other useful routines to handle the hierarchy, such as
  * {@link #pruneBranch(GenericFrame)}, {@link #appendBranch(List)},
  * {@link #isFrameReachable(GenericFrame)}, {@link #branch(GenericFrame, boolean)}, and
- * {@link #clearGraph()}.
+ * {@link #clearTree()}.
  * <p>
  * Each AbstractScene provides the following main object instances:
  * <ol>
@@ -177,7 +177,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   /**
    * Returns the top-level frames (those which referenceFrame is null).
    * <p>
-   * All leading frames are also reachable by the {@link #traverseGraph()} algorithm for
+   * All leading frames are also reachable by the {@link #traverseTree()} algorithm for
    * which they are the seeds.
    * 
    * @see #frames(boolean)
@@ -235,13 +235,13 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * @see #isFrameReachable(GenericFrame)
    * @see #pruneBranch(GenericFrame)
    */
-  public void traverseGraph() {
+  public void traverseTree() {
     for (GenericFrame frame : leadingFrames())
       visitFrame(frame);
   }
 
   /**
-   * Used by the traverse frame graph algorithm.
+   * Used by the traverse frame tree algorithm.
    */
   protected void visitFrame(GenericFrame frame) {
     pushModelView();
@@ -257,7 +257,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * 
    * @see #pruneBranch(GenericFrame)
    */
-  public void clearGraph() {
+  public void clearTree() {
     for (GenericFrame frame : leadingFrames())
       pruneBranch(frame);
   }
@@ -268,7 +268,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * A call to {@link #isFrameReachable(GenericFrame)} on all {@code frame} descendants
    * (including {@code frame}) will return false, after issuing this method. It also means
    * that all frames in the {@code frame} branch will become unreachable by the
-   * {@link #traverseGraph()} algorithm.
+   * {@link #traverseTree()} algorithm.
    * <p>
    * Frames in the {@code frame} branch will also be removed from all the agents currently
    * registered in the {@link #inputHandler()}.
@@ -287,7 +287,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * When collected, pruned frames behave like {@link remixlab.dandelion.geom.Frame},
    * otherwise they are eligible for garbage collection.
    * 
-   * @see #clearGraph()
+   * @see #clearTree()
    * @see #appendBranch(List)
    * @see #isFrameReachable(GenericFrame)
    */
@@ -327,14 +327,14 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   }
 
   /**
-   * Returns {@code true} if the frame is reachable by the {@link #traverseGraph()}
+   * Returns {@code true} if the frame is reachable by the {@link #traverseTree()}
    * algorithm and {@code false} otherwise.
    * <p>
    * Frames are make unreachable with {@link #pruneBranch(GenericFrame)} and reachable
    * again with
    * {@link remixlab.dandelion.core.GenericFrame#setReferenceFrame(GenericFrame)}.
    * 
-   * @see #traverseGraph()
+   * @see #traverseTree()
    * @see #frames(boolean)
    */
   public boolean isFrameReachable(GenericFrame frame) {
@@ -344,7 +344,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   }
 
   /**
-   * Returns a list of all the frames that are reachable by the {@link #traverseGraph()}
+   * Returns a list of all the frames that are reachable by the {@link #traverseTree()}
    * algorithm, including the EyeFrames (when {@code eyeframes} is {@code true}).
    * 
    * @see #isFrameReachable(GenericFrame)

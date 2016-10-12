@@ -694,7 +694,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
    * Procedure called by the scene frame traversal algorithm. Default implementation is
    * empty, i.e., it is meant to be implemented by derived classes.
    * 
-   * @see remixlab.dandelion.core.AbstractScene#traverseGraph()
+   * @see remixlab.dandelion.core.AbstractScene#traverseTree()
    */
   protected void visit() {
   }
@@ -706,7 +706,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
 
   /**
    * Enables {@link #visit()} of this frame when performing the
-   * {@link remixlab.dandelion.core.AbstractScene#traverseGraph()}.
+   * {@link remixlab.dandelion.core.AbstractScene#traverseTree()}.
    * 
    * @see #disableVisit()
    * @see #toggleVisit()
@@ -718,7 +718,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
 
   /**
    * Disables {@link #visit()} of this frame when performing the
-   * {@link remixlab.dandelion.core.AbstractScene#traverseGraph()}.
+   * {@link remixlab.dandelion.core.AbstractScene#traverseTree()}.
    * 
    * @see #enableVisit()
    * @see #toggleVisit()
@@ -730,7 +730,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
 
   /**
    * Toggles {@link #visit()} of this frame when performing the
-   * {@link remixlab.dandelion.core.AbstractScene#traverseGraph()}.
+   * {@link remixlab.dandelion.core.AbstractScene#traverseTree()}.
    * 
    * @see #enableVisit()
    * @see #disableVisit()
@@ -742,7 +742,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
 
   /**
    * Returns true if {@link #visit()} of this frame when performing the
-   * {@link remixlab.dandelion.core.AbstractScene#traverseGraph() is enabled}.
+   * {@link remixlab.dandelion.core.AbstractScene#traverseTree() is enabled}.
    * 
    * @see #enableVisit()
    * @see #disableVisit()
