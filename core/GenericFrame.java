@@ -597,7 +597,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
   protected GenericFrame detach() {
     GenericFrame frame = new GenericFrame(scene());
     scene().pruneBranch(frame);
-    frame.set(this);
+    frame.setWorldMatrix(this);
     return frame;
   }
 
