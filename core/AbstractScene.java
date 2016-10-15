@@ -1257,7 +1257,8 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   /**
    * Called after your main drawing and performs the following:
    * <ol>
-   * <li>Calls {@link remixlab.fpstiming.TimingHandler#handle()} and increments the the {@link #frameCount()}</li>
+   * <li>Calls {@link remixlab.fpstiming.TimingHandler#handle()} and increments the the
+   * {@link #frameCount()}</li>
    * <li>Calls {@link remixlab.bias.core.InputHandler#handle()}</li>
    * </ol>
    * 
@@ -2519,7 +2520,8 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * representation is much more intuitive than a camera-centric system (which for
    * instance is the standard in OpenGL).
    */
-  public abstract void proscenium();
+  public void proscenium() {
+  }
 
   // GENERAL STUFF
 
