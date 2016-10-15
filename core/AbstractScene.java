@@ -1223,42 +1223,45 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   }
 
   /**
-   * Called before your main drawing, e.g., P5.pre().
-   * <p>
-   * Handles the {@link #avatar()}, then calls {@link #bindMatrices()} and finally
-   * {@link remixlab.dandelion.core.Eye#updateBoundaryEquations()} if
-   * {@link #areBoundaryEquationsEnabled()}.
+   * Called before your main drawing and performs the following:
+   * <ol>
+   * <li>Handles the {@link #avatar()}</li>
+   * <li>Calls {@link #bindMatrices()}</li>
+   * <li>Calls {@link remixlab.dandelion.core.Eye#updateBoundaryEquations()} if
+   * {@link #areBoundaryEquationsEnabled()}</li>
+   * <li>Calls {@link #proscenium()} if it's overridden</li>
+   * <li>Calls {@link #invokeGraphicsHandler()}</li>
+   * <li>Calls {@link #displayVisualHints()}.</li>
+   * </ol>
+   * 
+   * @see #preDraw()
    */
   public void preDraw() {
-    if (avatar() != null && (!eye().anyInterpolationStarted())) {
+    // 1. Avatar
+    if (avatar() != null && (!eye().anyInterpolationStarted()))
       eye().frame().setWorldMatrix(avatar().trackingEyeFrame());
-      // this one is buggy:
-      // GenericFrame.sync(eye().frame(), avatar().trackingEyeFrame());
-    }
-
+    // 2. Eye
     bindMatrices();
     if (areBoundaryEquationsEnabled() && (eye().lastUpdate() > lastEqUpdate || lastEqUpdate == 0)) {
       eye().updateBoundaryEquations();
       lastEqUpdate = frameCount;
     }
+    // 3. Alternative use only
+    proscenium();
+    // 4. Draw external registered method (only in java sub-classes)
+    invokeGraphicsHandler(); // abstract
+    // 5. Display visual hints
+    displayVisualHints(); // abstract
   }
 
   /**
-   * Called after your main drawing, e.g., P5.draw().
-   * <p>
-   * Calls:
+   * Called after your main drawing and performs the following:
    * <ol>
-   * <li>{@link remixlab.fpstiming.TimingHandler#handle()}</li>
-   * <li>{@link remixlab.bias.core.InputHandler#handle()}</li>
-   * <li>{@link #proscenium()}</li>
-   * <li>{@link #invokeGraphicsHandler()}</li>
-   * <li>{@link #displayVisualHints()}.</li>
+   * <li>Calls {@link remixlab.fpstiming.TimingHandler#handle()} and increments the the {@link #frameCount()}</li>
+   * <li>Calls {@link remixlab.bias.core.InputHandler#handle()}</li>
    * </ol>
    * 
-   * @see #proscenium()
-   * @see #invokeGraphicsHandler()
-   * @see #gridVisualHint()
-   * @see #visualHints()
+   * @see #preDraw()
    */
   public void postDraw() {
     // 1. timers
@@ -1269,12 +1272,6 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
       frameCount = timingHandler().frameCount() + deltaCount;
     // 2. Agents
     inputHandler().handle();
-    // 3. Alternative use only
-    proscenium();
-    // 4. Draw external registered method (only in java sub-classes)
-    invokeGraphicsHandler(); // abstract
-    // 5. Display visual hints
-    displayVisualHints(); // abstract
   }
 
   /**
@@ -2522,8 +2519,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * representation is much more intuitive than a camera-centric system (which for
    * instance is the standard in OpenGL).
    */
-  public void proscenium() {
-  }
+  public abstract void proscenium();
 
   // GENERAL STUFF
 
