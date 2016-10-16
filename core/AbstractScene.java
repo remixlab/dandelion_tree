@@ -1248,9 +1248,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
     }
     // 3. Alternative use only
     proscenium();
-    // 4. Draw external registered method (only in java sub-classes)
-    invokeGraphicsHandler(); // abstract
-    // 5. Display visual hints
+    // 4. Display visual hints
     displayVisualHints(); // abstract
   }
 
@@ -1273,16 +1271,6 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
       frameCount = timingHandler().frameCount() + deltaCount;
     // 2. Agents
     inputHandler().handle();
-  }
-
-  /**
-   * Invokes an external drawing method (if registered). Called by {@link #postDraw()}.
-   * <p>
-   * Requires reflection and thus default implementation is empty. See proscene.Scene for
-   * an implementation.
-   */
-  protected boolean invokeGraphicsHandler() {
-    return false;
   }
 
   /**
