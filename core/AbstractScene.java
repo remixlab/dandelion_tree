@@ -1229,12 +1229,11 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * <li>Calls {@link #bindMatrices()}</li>
    * <li>Calls {@link remixlab.dandelion.core.Eye#updateBoundaryEquations()} if
    * {@link #areBoundaryEquationsEnabled()}</li>
-   * <li>Calls {@link #proscenium()} if it's overridden</li>
-   * <li>Calls {@link #invokeGraphicsHandler()}</li>
+   * <li>Calls {@link #proscenium()}</li>
    * <li>Calls {@link #displayVisualHints()}.</li>
    * </ol>
    * 
-   * @see #preDraw()
+   * @see #postDraw()
    */
   public void preDraw() {
     // 1. Avatar
@@ -1257,6 +1256,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * <ol>
    * <li>Calls {@link remixlab.fpstiming.TimingHandler#handle()} and increments the the
    * {@link #frameCount()}</li>
+   * <li>Increments the {@link #frameCount()}</li>
    * <li>Calls {@link remixlab.bias.core.InputHandler#handle()}</li>
    * </ol>
    * 
