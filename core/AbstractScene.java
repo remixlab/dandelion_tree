@@ -231,6 +231,9 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * {@link remixlab.dandelion.core.GenericFrame#visit()} on it.
    * <p>
    * Note that only reachable frames are visited by this algorithm.
+   * <p>
+   * <b>Attention:</b> this method should be called after {@link #bindMatrices()} (i.e.,
+   * eye update) and before any other transformation of the modelview takes place.
    * 
    * @see #isFrameReachable(GenericFrame)
    * @see #pruneBranch(GenericFrame)
