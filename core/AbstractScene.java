@@ -2397,6 +2397,11 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
     showWarning(method + " can only be performed using a relative event.");
   }
 
+  /**
+   * Same as {@code showOnlyEyeWarning(method, true)}.
+   * 
+   * @see #showOnlyEyeWarning(String, boolean)
+   */
   static public void showOnlyEyeWarning(String method) {
     showOnlyEyeWarning(method, true);
   }
