@@ -10,7 +10,9 @@
 
 package remixlab.dandelion.constraint;
 
-import remixlab.dandelion.geom.*;
+import remixlab.dandelion.geom.Frame;
+import remixlab.dandelion.geom.Rotation;
+import remixlab.dandelion.geom.Vec;
 
 /**
  * An interface class for Frame constraints. This nterface API aims to conform that of the
@@ -24,36 +26,36 @@ import remixlab.dandelion.geom.*;
  * {@link remixlab.dandelion.geom.Frame#constraint()}.
  */
 public abstract class Constraint {
-  /**
-   * Filters the translation applied to the Frame. This default implementation is empty
-   * (no filtering).
-   * <p>
-   * Overload this method in your own Constraint class to define a new translation
-   * constraint. {@code frame} is the Frame to which is applied the translation. You
-   * should refrain from directly changing its value in the constraint. Use its
-   * {@link remixlab.dandelion.geom.Frame#position()} and update the translation
-   * accordingly instead.
-   * <p>
-   * {@code translation} is expressed in the local Frame coordinate system. Use
-   * {@link remixlab.dandelion.geom.Frame#inverseTransformOf(Vec)} to express it in the
-   * world coordinate system if needed.
-   */
-  public Vec constrainTranslation(Vec translation, Frame frame) {
-    return translation.get();
-  }
+ /**
+  * Filters the translation applied to the Frame. This default implementation is empty
+  * (no filtering).
+  * <p>
+  * Overload this method in your own Constraint class to define a new translation
+  * constraint. {@code frame} is the Frame to which is applied the translation. You
+  * should refrain from directly changing its value in the constraint. Use its
+  * {@link remixlab.dandelion.geom.Frame#position()} and update the translation
+  * accordingly instead.
+  * <p>
+  * {@code translation} is expressed in the local Frame coordinate system. Use
+  * {@link remixlab.dandelion.geom.Frame#inverseTransformOf(Vec)} to express it in the
+  * world coordinate system if needed.
+  */
+ public Vec constrainTranslation(Vec translation, Frame frame) {
+  return translation.get();
+ }
 
-  /**
-   * Filters the rotation applied to the {@code frame}. This default implementation is
-   * empty (no filtering).
-   * <p>
-   * Overload this method in your own Constraint class to define a new rotation
-   * constraint. See {@link #constrainTranslation(Vec, Frame)} for details.
-   * <p>
-   * Use {@link remixlab.dandelion.geom.Frame#inverseTransformOf(Vec)} on the
-   * {@code rotation} {@link remixlab.dandelion.geom.Quat#axis()} to express
-   * {@code rotation} in the world coordinate system if needed.
-   */
-  public Rotation constrainRotation(Rotation rotation, Frame frame) {
-    return rotation.get();
-  }
+ /**
+  * Filters the rotation applied to the {@code frame}. This default implementation is
+  * empty (no filtering).
+  * <p>
+  * Overload this method in your own Constraint class to define a new rotation
+  * constraint. See {@link #constrainTranslation(Vec, Frame)} for details.
+  * <p>
+  * Use {@link remixlab.dandelion.geom.Frame#inverseTransformOf(Vec)} on the
+  * {@code rotation} {@link remixlab.dandelion.geom.Quat#axis()} to express
+  * {@code rotation} in the world coordinate system if needed.
+  */
+ public Rotation constrainRotation(Rotation rotation, Frame frame) {
+  return rotation.get();
+ }
 }
