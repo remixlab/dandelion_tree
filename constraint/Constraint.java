@@ -15,7 +15,7 @@ import remixlab.dandelion.geom.Rotation;
 import remixlab.dandelion.geom.Vec;
 
 /**
- * An interface class for Frame constraints. This nterface API aims to conform that of the
+ * An interface class for Frame constraints. This interface API aims to conform that of the
  * great <a href=
  * "http://libqglviewer.com/refManual/classqglviewer_1_1Constraint.html">libQGLViewer
  * Constraint</a>.
