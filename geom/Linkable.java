@@ -16,35 +16,36 @@ import remixlab.util.Copyable;
  * Interface for objects represented from array-data.
  */
 public interface Linkable extends Copyable {
- /**
-  * Share the src array data.
-  */
- public void link(float[] src);
+  /**
+   * Share the src array data.
+   */
+  public void link(float[] src);
 
- /**
-  * Stop sharing data with the source
-  */
- public void unLink();
+  /**
+   * Stop sharing data with the source
+   */
+  public void unLink();
 
- @Override public Linkable get();
+  @Override
+  public Linkable get();
 
- /**
-  * Gets data as an array
-  */
- public float[] get(float[] target);
+  /**
+   * Gets data as an array
+   */
+  public float[] get(float[] target);
 
- /**
-  * Links array data representation with the source
-  */
- public void set(Linkable source);
+  /**
+   * Links array data representation with the source
+   */
+  public void set(Linkable source);
 
- /**
-  * Sets representation from the array data
-  */
- public void set(float[] source);
+  /**
+   * Sets representation from the array data
+   */
+  public void set(float[] source);
 
- /**
-  * Sets data to default value.
-  */
- public void reset();
+  /**
+   * Sets data to default value.
+   */
+  public void reset();
 }
