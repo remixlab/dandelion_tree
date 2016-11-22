@@ -14,7 +14,7 @@ import remixlab.bias.core.Agent;
 import remixlab.bias.core.BogusEvent;
 import remixlab.bias.core.Grabber;
 import remixlab.bias.core.InputHandler;
-import remixlab.bias.event.KeyboardEvent;
+import remixlab.bias.event.*;
 import remixlab.dandelion.constraint.Constraint;
 import remixlab.dandelion.geom.*;
 import remixlab.fpstiming.Animator;
@@ -505,6 +505,37 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   public boolean checkIfGrabsInput(BogusEvent event) {
     if (event instanceof KeyboardEvent)
       return checkIfGrabsInput((KeyboardEvent) event);
+    if (event instanceof ClickEvent)
+      return checkIfGrabsInput((ClickEvent) event);
+    if (event instanceof MotionEvent)
+      return checkIfGrabsInput((MotionEvent) event);
+    return false;
+  }
+
+  /**
+   * Internal use. You don't need to call this.
+   * <p>
+   * Automatically called by agents handling this frame.
+   */
+  public boolean checkIfGrabsInput(MotionEvent event) {
+    if (event instanceof DOF1Event)
+      return checkIfGrabsInput((DOF1Event) event);
+    if (event instanceof DOF2Event)
+      return checkIfGrabsInput((DOF2Event) event);
+    if (event instanceof DOF3Event)
+      return checkIfGrabsInput((DOF3Event) event);
+    if (event instanceof DOF6Event)
+      return checkIfGrabsInput((DOF6Event) event);
+    return false;
+  }
+
+  /**
+   * Internal use. You don't need to call this.
+   * <p>
+   * Automatically called by agents handling this frame.
+   */
+  public boolean checkIfGrabsInput(ClickEvent event) {
+    AbstractScene.showMissingImplementationWarning("checkIfGrabsInput(clickEvent event)", this.getClass().getName());
     return false;
   }
 
@@ -512,15 +543,107 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * Override this method when you want the object to be picked from a
    * {@link remixlab.bias.event.KeyboardEvent}.
    */
-  protected boolean checkIfGrabsInput(KeyboardEvent event) {
+  public boolean checkIfGrabsInput(KeyboardEvent event) {
     AbstractScene.showMissingImplementationWarning("checkIfGrabsInput(KeyboardEvent event)", this.getClass().getName());
     return false;
   }
 
+  /**
+   * Internal use. You don't need to call this. Automatically called by agents handling this frame.
+   * <p>
+   * Override this method when you want the object to be picked from a {@link remixlab.bias.event.DOF1Event}.
+   */
+  public boolean checkIfGrabsInput(DOF1Event event) {
+    AbstractScene.showMissingImplementationWarning("checkIfGrabsInput(DOF1Event event)", this.getClass().getName());
+    return false;
+  }
+
+  /**
+   * Internal use. You don't need to call this. Automatically called by agents handling this frame.
+   * <p>
+   * Override this method when you want the object to be picked from a {@link remixlab.bias.event.DOF1Event}.
+   */
+  public boolean checkIfGrabsInput(DOF2Event event) {
+    AbstractScene.showMissingImplementationWarning("checkIfGrabsInput(DOF2Event event)", this.getClass().getName());
+    return false;
+  }
+
+  /**
+   * Internal use. You don't need to call this. Automatically called by agents handling this frame.
+   */
+  public boolean checkIfGrabsInput(DOF3Event event) {
+    return checkIfGrabsInput(event.dof2Event());
+  }
+
+  /**
+   * Internal use. You don't need to call this. Automatically called by agents handling this frame.
+   */
+  public boolean checkIfGrabsInput(DOF6Event event) {
+    return checkIfGrabsInput(event.dof3Event().dof2Event());
+  }
+
   @Override
   public void performInteraction(BogusEvent event) {
+    if (event instanceof ClickEvent)
+      performInteraction((ClickEvent) event);
+    if (event instanceof MotionEvent)
+      performInteraction((MotionEvent) event);
     if (event instanceof KeyboardEvent)
       performInteraction((KeyboardEvent) event);
+  }
+
+  /**
+   * Calls performInteraction() on the proper motion event:
+   * {@link remixlab.bias.event.DOF1Event}, {@link remixlab.bias.event.DOF2Event},
+   * {@link remixlab.bias.event.DOF3Event} or {@link remixlab.bias.event.DOF6Event}.
+   * <p>
+   * Override this method when you want the object to perform an interaction from a
+   * {@link remixlab.bias.event.MotionEvent}.
+   */
+  protected void performInteraction(MotionEvent event) {
+    if (event instanceof DOF1Event)
+      performInteraction((DOF1Event) event);
+    if (event instanceof DOF2Event)
+      performInteraction((DOF2Event) event);
+    if (event instanceof DOF3Event)
+      performInteraction((DOF3Event) event);
+    if (event instanceof DOF6Event)
+      performInteraction((DOF6Event) event);
+  }
+
+  /**
+   * Override this method when you want the object to perform an interaction from a
+   * {@link remixlab.bias.event.DOF1Event}.
+   */
+  protected void performInteraction(DOF1Event event) {
+  }
+
+  /**
+   * Override this method when you want the object to perform an interaction from a
+   * {@link remixlab.bias.event.DOF2Event}.
+   */
+  protected void performInteraction(DOF2Event event) {
+  }
+
+  /**
+   * Override this method when you want the object to perform an interaction from a
+   * {@link remixlab.bias.event.DOF3Event}.
+   */
+  protected void performInteraction(DOF3Event event) {
+  }
+
+  /**
+   * Override this method when you want the object to perform an interaction from a
+   * {@link remixlab.bias.event.DOF6Event}.
+   */
+  protected void performInteraction(DOF6Event event) {
+  }
+
+  /**
+   * Override this method when you want the object to perform an interaction from a
+   * {@link remixlab.bias.event.ClickEvent}.
+   */
+  protected void performInteraction(ClickEvent event) {
   }
 
   /**
