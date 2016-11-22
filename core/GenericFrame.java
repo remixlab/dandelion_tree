@@ -873,7 +873,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
    * @see #pickingPrecision()
    * @see #setPickingPrecision(PickingPrecision)
    */
-  public boolean checkIfGrabsInput(float x, float y) {
+  protected boolean checkIfGrabsInput(float x, float y) {
     Vec proj = gScene.eye().projectedCoordinatesOf(position());
     float halfThreshold = grabsInputThreshold() / 2;
     return ((Math.abs(x - proj.vec[0]) < halfThreshold) && (Math.abs(y - proj.vec[1]) < halfThreshold));
@@ -915,7 +915,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
    * Override this method when you want the object to perform an interaction from a
    * {@link remixlab.bias.event.MotionEvent}.
    */
-  public void performInteraction(MotionEvent event) {
+  protected void performInteraction(MotionEvent event) {
     if (event instanceof DOF1Event)
       performInteraction((DOF1Event) event);
     if (event instanceof DOF2Event)
@@ -1421,8 +1421,6 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
   /**
    * Internal method. Recomputes the {@link #spinningRotation()} according to
    * {@link #damping()}.
-   *
-   * @see #recomputeFlyDirection()
    */
   protected void recomputeSpinningRotation() {
     float prevSpeed = eventSpeed;

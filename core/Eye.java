@@ -1563,7 +1563,7 @@ public abstract class Eye implements Copyable {
    * Removes all the Frames from all the pools of the agents registered at the
    * {@link remixlab.dandelion.core.AbstractScene#inputHandler()}.
    *
-   * @see #addPathToMotionAgent()
+   * @see #attachPath(int)
    */
   protected void detachPath(int key) {
     if (kfi.containsKey(key)) {
@@ -1584,7 +1584,7 @@ public abstract class Eye implements Copyable {
    * Re-adds all the Frames to all the pools of the agents registered at the
    * {@link remixlab.dandelion.core.AbstractScene#inputHandler()}.
    *
-   * @see #removePathFromMotionAgent()
+   * @see #detachPath(int)
    */
   protected void attachPath(int key) {
     if (kfi.containsKey(key)) {

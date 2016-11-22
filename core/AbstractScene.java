@@ -502,24 +502,10 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   // Grabber Implementation
 
   @Override
-  public void performInteraction(BogusEvent event) {
-    if (event instanceof KeyboardEvent)
-      performInteraction((KeyboardEvent) event);
-  }
-
-  @Override
   public boolean checkIfGrabsInput(BogusEvent event) {
     if (event instanceof KeyboardEvent)
       return checkIfGrabsInput((KeyboardEvent) event);
     return false;
-  }
-
-  /**
-   * Override this method when you want the object to perform an interaction from a
-   * {@link remixlab.bias.event.KeyboardEvent}.
-   */
-  protected void performInteraction(KeyboardEvent event) {
-    AbstractScene.showMissingImplementationWarning("performInteraction(KeyboardEvent event)", this.getClass().getName());
   }
 
   /**
@@ -529,6 +515,20 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   protected boolean checkIfGrabsInput(KeyboardEvent event) {
     AbstractScene.showMissingImplementationWarning("checkIfGrabsInput(KeyboardEvent event)", this.getClass().getName());
     return false;
+  }
+
+  @Override
+  public void performInteraction(BogusEvent event) {
+    if (event instanceof KeyboardEvent)
+      performInteraction((KeyboardEvent) event);
+  }
+
+  /**
+   * Override this method when you want the object to perform an interaction from a
+   * {@link remixlab.bias.event.KeyboardEvent}.
+   */
+  protected void performInteraction(KeyboardEvent event) {
+    AbstractScene.showMissingImplementationWarning("performInteraction(KeyboardEvent event)", this.getClass().getName());
   }
 
   /**
@@ -1702,7 +1702,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * {@link remixlab.dandelion.core.Eye#anchor()} is being set.
    * <p>
    * Simply calls {@link #drawCross(float, float, float)} on
-   * {@link remixlab.dandelion.core.Eye#projectedCoordinatesOf()} from
+   * {@link remixlab.dandelion.core.Eye#projectedCoordinatesOf(Vec)}} from
    * {@link remixlab.dandelion.core.Eye#anchor()}.
    *
    * @see #drawCross(float, float, float)
