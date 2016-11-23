@@ -529,7 +529,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
     scene().registerTimingTask(flyTimerTask);
     // end
 
-    // TODO experimental
+    // init 3rd person stuff
     q = scene().is3D() ? new Quat((float) Math.PI / 4, 0, 0) : new Rot((float) Math.PI / 4);
     // updateTrackingEyeFrame();
   }

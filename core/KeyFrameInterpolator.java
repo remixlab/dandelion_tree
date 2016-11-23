@@ -759,7 +759,6 @@ public class KeyFrameInterpolator implements Copyable {
         updateModifiedFrameValues();
 
       if (keyFrameList.get(0) == keyFrameList.get(keyFrameList.size() - 1))
-        // TODO experimenting really
         path.add(
             new Frame(keyFrameList.get(0).position(), keyFrameList.get(0).orientation(), keyFrameList.get(0).magnitude()));
       else {

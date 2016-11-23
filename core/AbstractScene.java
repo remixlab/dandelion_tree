@@ -1474,11 +1474,6 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
     for (int i = 0; i < k.length; i++)
       drawPath(k[i], 3, 5, radius());
     // */
-
-    /*
-     * // TODO experimental for (GenericFrame gFrame : eye.keyFrames())
-     * drawPickingTarget(gFrame); //
-     */
   }
 
   /**

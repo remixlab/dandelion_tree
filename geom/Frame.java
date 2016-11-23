@@ -207,10 +207,6 @@ public class Frame implements Copyable {
   }
 
   protected Frame(Frame other) {
-    // TODO experimental
-    // Iterator<Frame> iterator = other.childrenList.iterator();
-    // while (iterator.hasNext())
-    // childrenList.add(iterator.next());
     trans = other.translation().get();
     rot = other.rotation().get();
     scl = other.scaling();
