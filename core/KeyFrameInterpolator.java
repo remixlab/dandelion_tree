@@ -736,7 +736,7 @@ public class KeyFrameInterpolator implements Copyable {
    * <p>
    * Use it in your KeyFrameInterpolator path drawing routine.
    *
-   * @see remixlab.dandelion.core.AbstractScene#drawPath(KeyFrameInterpolator, int, int, * float)
+   * @see remixlab.dandelion.core.AbstractScene#drawPath(KeyFrameInterpolator, int, int, float)
    */
   public List<Frame> path() {
     updatePath();
