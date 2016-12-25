@@ -1923,14 +1923,6 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   }
 
   /**
-   * @deprecated
-   */
-  @Deprecated
-  public Trackable unsetAvatar() {
-    return resetAvatar();
-  }
-
-  /**
    * Returns the current avatar before resetting it (i.e., setting it to null).
    *
    * @see #setAvatar(Trackable)

@@ -1327,14 +1327,6 @@ public class Frame implements Copyable {
   }
 
   /**
-   * @deprecated use {@link #set(Frame)}.
-   */
-  @Deprecated
-  public void fromFrame(Frame otherFrame) {
-    set(otherFrame);
-  }
-
-  /**
    * Returns a Frame representing the inverse of the Frame space transformation.
    * <p>
    * The the new Frame {@link #rotation()} is the
