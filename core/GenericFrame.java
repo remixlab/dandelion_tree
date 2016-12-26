@@ -153,7 +153,9 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
 
   private float grabsInputThreshold;
 
-  private boolean visit = true;
+  private boolean visit;
+
+  private boolean hint;
 
   /**
    * Enumerates the Picking precision modes.
@@ -161,8 +163,6 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
   public enum PickingPrecision {
     FIXED, ADAPTIVE, EXACT
   }
-
-  ;
 
   protected PickingPrecision pkgnPrecision;
 
@@ -463,6 +463,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
   public GenericFrame(AbstractScene scn, GenericFrame referenceFrame, Vec p, Rotation r, float s) {
     super(referenceFrame, p, r, s);
     init(scn);
+    hint = true;
     // pkgnPrecision = PickingPrecision.ADAPTIVE;
     // setGrabsInputThreshold(Math.round(scn.radius()/4));
     scene().inputHandler().addGrabber(this);
@@ -492,6 +493,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
     super(referenceFrame, p, r, s);
     theeye = eye;
     init(theeye.scene());
+    hint = false;
     // dummy value:
     pkgnPrecision = PickingPrecision.FIXED;
     setFlySpeed(0.01f * eye().sceneRadius());
@@ -502,6 +504,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
 
   protected void init(AbstractScene scn) {
     gScene = scn;
+    visit = true;
     childrenList = new ArrayList<GenericFrame>();
     // scene().addLeadingFrame(this);
     setReferenceFrame(referenceFrame());// restorePath seems more robust
@@ -539,6 +542,9 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
     super(otherFrame);
     this.gScene = otherFrame.gScene;
     this.theeye = otherFrame.theeye;
+
+    this.visit = otherFrame.visit;
+    this.hint = otherFrame.hint;
 
     this.childrenList = new ArrayList<GenericFrame>();
     this.setReferenceFrame(referenceFrame());// restorePath
@@ -751,10 +757,65 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
    *
    * @see #enableVisit()
    * @see #disableVisit()
-   * @see #isVisitEnabled()
+   * @see #toggleVisit()
    */
   public boolean isVisitEnabled() {
     return visit;
+  }
+
+  /**
+   * Enables drawing of the frame picking hint. Only meaningful if frame is not
+   * an eye frame.
+   *
+   * @see AbstractScene#pickingVisualHint()
+   * @see #disablePickingHint()
+   * @see #togglePickingHint()
+   * @see #isPickingHintEnabled()
+   */
+  public void enablePickingHint() {
+    if (!isEyeFrame())
+      hint = true;
+  }
+
+  /**
+   * Disables drawing of the frame picking hint. Only meaningful if frame is not
+   * an eye frame.
+   *
+   * @see AbstractScene#pickingVisualHint()
+   * @see #enablePickingHint()
+   * @see #togglePickingHint()
+   * @see #isPickingHintEnabled()
+   */
+  public void disablePickingHint() {
+    if (!isEyeFrame())
+      hint = false;
+  }
+
+  /**
+   * Toggles drawing of the frame picking hint. Only meaningful if frame is not
+   * an eye frame.
+   *
+   * @see AbstractScene#pickingVisualHint()
+   * @see #enablePickingHint()
+   * @see #disablePickingHint()
+   * @see #isPickingHintEnabled()
+   */
+  public void togglePickingHint() {
+    if (!isEyeFrame())
+      hint = !hint;
+  }
+
+  /**
+   * Returns {@code true} if drawing of the frame picking hint is enabled and
+   * {@code false} otherwise. Always returns {@code false} if frame is an eye frame.
+   *
+   * @see AbstractScene#pickingVisualHint()
+   * @see #enablePickingHint()
+   * @see #disablePickingHint()
+   * @see #togglePickingHint()
+   */
+  public boolean isPickingHintEnabled() {
+    return hint;
   }
 
   /**

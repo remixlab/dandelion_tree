@@ -1435,7 +1435,8 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   protected void drawPickingTargets() {
     for (GenericFrame frame : frames(false))
       // if(inputHandler().hasGrabber(frame))
-      drawPickingTarget(frame);
+      if (frame.isPickingHintEnabled())
+        drawPickingTarget(frame);
   }
 
   /**
