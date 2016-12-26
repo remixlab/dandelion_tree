@@ -10,9 +10,9 @@
 
 package remixlab.dandelion.core;
 
-import remixlab.bias.core.Agent;
-import remixlab.bias.core.BogusEvent;
-import remixlab.bias.core.Grabber;
+import remixlab.bias.Agent;
+import remixlab.bias.BogusEvent;
+import remixlab.bias.Grabber;
 import remixlab.bias.event.ClickEvent;
 import remixlab.bias.event.KeyboardEvent;
 import remixlab.bias.event.MotionEvent;

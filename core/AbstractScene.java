@@ -10,10 +10,10 @@
 
 package remixlab.dandelion.core;
 
-import remixlab.bias.core.Agent;
-import remixlab.bias.core.BogusEvent;
-import remixlab.bias.core.Grabber;
-import remixlab.bias.core.InputHandler;
+import remixlab.bias.Agent;
+import remixlab.bias.BogusEvent;
+import remixlab.bias.Grabber;
+import remixlab.bias.InputHandler;
 import remixlab.bias.event.*;
 import remixlab.dandelion.constraint.Constraint;
 import remixlab.dandelion.geom.*;
@@ -28,7 +28,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * A 2D or 3D {@link remixlab.bias.core.Grabber} scene.
+ * A 2D or 3D {@link Grabber} scene.
  * <p>
  * Main package class representing an interface between Dandelion and the outside world.
  * For an introduction to DANDELION please refer to
@@ -50,8 +50,8 @@ import java.util.List;
  * <li>A {@link #timingHandler()} which control (single-threaded) timing operations. For
  * details please refer to the {@link remixlab.fpstiming.TimingHandler} class.</li>
  * <li>An {@link #inputHandler()} which handles all user input through
- * {@link remixlab.bias.core.Agent}s (for details please refer to the
- * {@link remixlab.bias.core.InputHandler} class). The {@link #inputHandler()} holds a
+ * {@link Agent}s (for details please refer to the
+ * {@link InputHandler} class). The {@link #inputHandler()} holds a
  * (default) {@link #motionAgent()} and a (default) {@link #keyboardAgent()} which should
  * be instantiated by derived classes at construction time.</li>
  * <li>A {@link #matrixHelper()} which handles matrix operations either through the
@@ -68,7 +68,7 @@ import java.util.List;
  * <li>By checking if the scene's {@link #timer()} was triggered within the frame.
  * </ol>
  * <p>
- * A grabber scene implements the {@link remixlab.bias.core.Grabber} interface and thus
+ * A grabber scene implements the {@link Grabber} interface and thus
  * can react to user (keyboard) gestures, (see {@link #performInteraction(KeyboardEvent)}
  * and {@link #checkIfGrabsInput(KeyboardEvent)}). For example, with the following code:
  * <p>
@@ -83,7 +83,7 @@ import java.util.List;
  * <p>
  * your custom scene will {@link #toggleCameraType()} when the key 'z' is pressed
  * (provided that scene is the {@link #keyboardAgent()}
- * {@link remixlab.bias.core.Agent#inputGrabber()}).
+ * {@link Agent#inputGrabber()}).
  */
 public abstract class AbstractScene extends AnimatorObject implements Grabber {
   protected boolean dottedGrid;
@@ -156,7 +156,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * {@link #is2D()} or {@link #is3D()}.</li>
    * <li>Instantiate the {@link #motionAgent()} and the {@link #keyboardAgent()} and
    * enable them (register them at the {@link #inputHandler()}) and possibly some other
-   * {@link remixlab.bias.core.Agent}s as well and .</li>
+   * {@link Agent}s as well and .</li>
    * <li>Define whether or not the Scene {@link #isOffscreen()}.</li>
    * <li>Call {@link #init()} at the end of the constructor.</li>
    * </ol>
@@ -655,7 +655,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   }
 
   /**
-   * Check if this object is the {@link remixlab.bias.core.Agent#inputGrabber()} . Returns
+   * Check if this object is the {@link Agent#inputGrabber()} . Returns
    * {@code true} if this object grabs the agent and {@code false} otherwise.
    */
   public boolean grabsInput(Agent agent) {
@@ -700,7 +700,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   // Keyboard
 
   /**
-   * Returns the default {@link remixlab.bias.core.Agent} keyboard agent.
+   * Returns the default {@link Agent} keyboard agent.
    *
    * @see #motionAgent()
    */
@@ -770,7 +770,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   }
 
   /**
-   * Disables the default {@link remixlab.bias.core.Agent} and returns it.
+   * Disables the default {@link Agent} and returns it.
    *
    * @see #isKeyboardAgentEnabled()
    * @see #enableKeyboardAgent()
@@ -860,7 +860,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   // E V E N T H A N D L I N G
 
   /**
-   * Returns the scene {@link remixlab.bias.core.InputHandler}.
+   * Returns the scene {@link InputHandler}.
    */
   public InputHandler inputHandler() {
     return iHandler;
@@ -1386,7 +1386,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * <li>Calls {@link remixlab.fpstiming.TimingHandler#handle()} and increments the the
    * {@link #frameCount()}</li>
    * <li>Increments the {@link #frameCount()}</li>
-   * <li>Calls {@link remixlab.bias.core.InputHandler#handle()}</li>
+   * <li>Calls {@link InputHandler#handle()}</li>
    * </ol>
    *
    * @see #preDraw()
@@ -1963,7 +1963,7 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
    * Replaces the current {@link #eye()} with {@code vp}.
    * <p>
    * The {@link #inputHandler()} will attempt to add the {@link #eyeFrame()} to all its
-   * {@link remixlab.bias.core.InputHandler#agents()}, such as the {@link #motionAgent()}
+   * {@link InputHandler#agents()}, such as the {@link #motionAgent()}
    * and {@link #keyboardAgent()}.
    */
   public void setEye(Eye vp) {

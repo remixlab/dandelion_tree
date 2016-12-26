@@ -10,9 +10,10 @@
 
 package remixlab.dandelion.core;
 
-import remixlab.bias.core.Agent;
-import remixlab.bias.core.BogusEvent;
-import remixlab.bias.core.Grabber;
+import remixlab.bias.Agent;
+import remixlab.bias.BogusEvent;
+import remixlab.bias.Grabber;
+import remixlab.bias.InputHandler;
 import remixlab.bias.event.*;
 import remixlab.dandelion.core.AbstractScene.Platform;
 import remixlab.dandelion.geom.*;
@@ -25,11 +26,11 @@ import java.util.List;
 
 /**
  * A {@link remixlab.dandelion.geom.Frame} implementing the
- * {@link remixlab.bias.core.Grabber} interface, which converts user gestures into
+ * {@link Grabber} interface, which converts user gestures into
  * translation, rotation and scaling {@link remixlab.dandelion.geom.Frame} updates (see
  * {@link #translationSensitivity()}, {@link #rotationSensitivity()} and
  * {@link #scalingSensitivity()}). A generic-frame may thus be attached to some of your
- * scene objects to control their motion using an {@link remixlab.bias.core.Agent}, such
+ * scene objects to control their motion using an {@link Agent}, such
  * as the {@link remixlab.dandelion.core.AbstractScene#motionAgent()} and the
  * {@link remixlab.dandelion.core.AbstractScene#keyboardAgent()} (see
  * {@link #GenericFrame(AbstractScene)} and all the constructors that take an scene
@@ -87,7 +88,7 @@ import java.util.List;
  * <p>
  * your custom generic-frame will then accordingly react to the LEFT and RIGHT mouse
  * buttons, provided it's added to the mouse-agent first (see
- * {@link remixlab.bias.core.Agent#addGrabber(Grabber)}.
+ * {@link Agent#addGrabber(Grabber)}.
  * <p>
  * Picking a generic-frame is done accordingly to a {@link #pickingPrecision()}. Refer to
  * {@link #setPickingPrecision(PickingPrecision)} for details.
@@ -446,7 +447,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
    * {@link #translation()}, {@link #rotation()} and {@link #scaling()}, respectively.
    * <p>
    * The {@link remixlab.dandelion.core.AbstractScene#inputHandler()} will attempt to add
-   * the generic-frame to all its {@link remixlab.bias.core.InputHandler#agents()}, such
+   * the generic-frame to all its {@link InputHandler#agents()}, such
    * as the {@link remixlab.dandelion.core.AbstractScene#motionAgent()} and the
    * {@link remixlab.dandelion.core.AbstractScene#keyboardAgent()}.
    * <p>
@@ -477,7 +478,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
    * <p>
    * The generic-frame isn't added to any of the
    * {@link remixlab.dandelion.core.AbstractScene#inputHandler()}
-   * {@link remixlab.bias.core.InputHandler#agents()}. A call to
+   * {@link InputHandler#agents()}. A call to
    * {@link remixlab.dandelion.core.AbstractScene#setEye(Eye)} will do it.
    * <p>
    * The generic-frame sensitivities are set to their default values, see
@@ -2996,7 +2997,7 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
   }
 
   /**
-   * Check if this object is the {@link remixlab.bias.core.Agent#inputGrabber()} . Returns
+   * Check if this object is the {@link Agent#inputGrabber()} . Returns
    * {@code true} if this object grabs the agent and {@code false} otherwise.
    */
   public boolean grabsInput(Agent agent) {
