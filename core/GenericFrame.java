@@ -768,11 +768,11 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
    * an eye frame.
    *
    * @see AbstractScene#pickingVisualHint()
-   * @see #disablePickingHint()
-   * @see #togglePickingHint()
-   * @see #isPickingHintEnabled()
+   * @see #disableVisualHint()
+   * @see #toggleVisualHint()
+   * @see #isVisualHintEnabled()
    */
-  public void enablePickingHint() {
+  public void enableVisualHint() {
     if (!isEyeFrame())
       hint = true;
   }
@@ -782,11 +782,11 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
    * an eye frame.
    *
    * @see AbstractScene#pickingVisualHint()
-   * @see #enablePickingHint()
-   * @see #togglePickingHint()
-   * @see #isPickingHintEnabled()
+   * @see #enableVisualHint()
+   * @see #toggleVisualHint()
+   * @see #isVisualHintEnabled()
    */
-  public void disablePickingHint() {
+  public void disableVisualHint() {
     if (!isEyeFrame())
       hint = false;
   }
@@ -796,11 +796,11 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
    * an eye frame.
    *
    * @see AbstractScene#pickingVisualHint()
-   * @see #enablePickingHint()
-   * @see #disablePickingHint()
-   * @see #isPickingHintEnabled()
+   * @see #enableVisualHint()
+   * @see #disableVisualHint()
+   * @see #isVisualHintEnabled()
    */
-  public void togglePickingHint() {
+  public void toggleVisualHint() {
     if (!isEyeFrame())
       hint = !hint;
   }
@@ -810,11 +810,11 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
    * {@code false} otherwise. Always returns {@code false} if frame is an eye frame.
    *
    * @see AbstractScene#pickingVisualHint()
-   * @see #enablePickingHint()
-   * @see #disablePickingHint()
-   * @see #togglePickingHint()
+   * @see #enableVisualHint()
+   * @see #disableVisualHint()
+   * @see #toggleVisualHint()
    */
-  public boolean isPickingHintEnabled() {
+  public boolean isVisualHintEnabled() {
     return hint;
   }
 
