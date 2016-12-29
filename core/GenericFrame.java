@@ -773,8 +773,11 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
    * @see #isVisualHintEnabled()
    */
   public void enableVisualHint() {
-    if (!isEyeFrame())
-      hint = true;
+    if (isEyeFrame()) {
+      AbstractScene.showOnlyEyeWarning("enableVisualHint", false);
+      return;
+    }
+    hint = true;
   }
 
   /**
@@ -787,8 +790,11 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
    * @see #isVisualHintEnabled()
    */
   public void disableVisualHint() {
-    if (!isEyeFrame())
-      hint = false;
+    if (isEyeFrame()) {
+      AbstractScene.showOnlyEyeWarning("disableVisualHint", false);
+      return;
+    }
+    hint = false;
   }
 
   /**
@@ -801,8 +807,11 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
    * @see #isVisualHintEnabled()
    */
   public void toggleVisualHint() {
-    if (!isEyeFrame())
-      hint = !hint;
+    if (isEyeFrame()) {
+      AbstractScene.showOnlyEyeWarning("toggleVisualHint", false);
+      return;
+    }
+    hint = !hint;
   }
 
   /**
@@ -815,6 +824,8 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
    * @see #toggleVisualHint()
    */
   public boolean isVisualHintEnabled() {
+    if (isEyeFrame())
+      AbstractScene.showOnlyEyeWarning("isVisualHintEnabled", false);
     return hint;
   }
 

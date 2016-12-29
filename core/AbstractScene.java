@@ -2507,8 +2507,9 @@ public abstract class AbstractScene extends AnimatorObject implements Grabber {
   }
 
   /**
-   * Display a warning that the specified method is only available for a frame (but not an
-   * eye-frame).
+   * Display a warning that the specified method is only available for an eye-frame if
+   * {@code eye} is {@code true} or a frame, different than an eye-frame, if {@code eye}
+   * is {@code false}.
    */
   static public void showOnlyEyeWarning(String method, boolean eye) {
     if (eye)
