@@ -593,6 +593,14 @@ public class GenericFrame extends Frame implements Grabber, Trackable {
           agent.addGrabber(this);
   }
 
+  /**
+   * Perform a deep, non-recursive copy of this generic-frame.
+   * <p>
+   * The copied frame will keep this frame {@link #referenceFrame()}, but its children
+   * aren't copied.
+   *
+   * @return generic-frame copy
+   */
   @Override
   public GenericFrame get() {
     return new GenericFrame(this);
